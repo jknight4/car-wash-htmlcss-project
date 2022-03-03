@@ -267,7 +267,7 @@ body{
     border-radius: 50%;
 }
 .profiles-box{
-    align-items: flex-start;
+    align-items: start;
 }
 .testimonial-profile-header{
     margin-bottom: 2.4rem;
@@ -288,4 +288,13 @@ body{
 /* ---------------------- */
 /* GALLERY SECTION */
 /* ---------------------- */
-
+.gallery-grid{
+    max-width: 100rem;
+    margin: 0 auto;
+    display: grid;
+    align-items:center;
+    column-gap: 6.4rem;
+    row-gap: 6.4rem;
+    grid-template-columns: repeat(3, 1fr);
+    
+}
