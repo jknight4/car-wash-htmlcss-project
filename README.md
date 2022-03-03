@@ -1,4 +1,4 @@
-# Automotive Detailing HTML CSS Project 
+# Automotive Detailing - HTML CSS Project 
 
 
 ## Why 
