@@ -155,12 +155,12 @@ body{
     align-items: center;
     background-color:#fff; 
 
-    height: 13.2rem; 
+    height: 10rem; 
     padding: 0 4.8rem;
     margin-bottom: 8rem;
 }
 .logo{
-    height: 10rem;
+    height: 8rem;
 }
 
 /* ---------------------- */
@@ -288,10 +288,10 @@ body{
 /* GALLERY SECTION */
 /* ---------------------- */
 .gallery-grid{
-    max-width: 100rem;
+    max-width: 90rem;
     margin: 0 auto;
     display: grid;
-    align-items:center;
+    align-items: end;
     gap: 1.6rem;
     grid-template-columns: repeat(3, 1fr);
 }
@@ -307,3 +307,8 @@ body{
 .gallery-img:hover{
     transform: scale(1.1);
 }
+
+
+/* ---------------------- */
+/* PRICING / SERVICES SECTION */
+/* ---------------------- */
