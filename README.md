@@ -4,8 +4,7 @@
 ## Why 
     After completing a Udemy course on HTML and CSS by Jonas Schmedtmann, I wanted to test out my HTML, CSS, and JavaScript skills. 
     I decided to develop a website for a fictitious business. The fictitious business is called Primtetime Automotive Detailing LLC. 
-    I came up with the idea, because I thought that a car detailing business would need various features such as a Gallery, Pricing plans, FAQs,
-    a Contact form, and more. 
+    I came up with the idea, because I thought that a car detailing business would need various features such as a Gallery, Pricing plans, FAQs, a Contact form, and more. 
 
 ## Approach
 
