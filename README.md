@@ -12,6 +12,8 @@
     I used other webpages and designs for inspiration. I designed the logo on Canva and used various sources for the pictures. 
 
     The theme of the website is Simple/Minimalist and Startup/Upbeat. 
+    
+    Desktop first approach
 
 ## Wireframes / Preview Pictures
 
