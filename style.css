@@ -21,6 +21,7 @@ Paragraph default: 1.6
 
 - Letter spacing:
 -0.5px
+0.50px
 0.75px
 
 --- 02 COLORS
@@ -312,3 +313,118 @@ body{
 /* ---------------------- */
 /* PRICING / SERVICES SECTION */
 /* ---------------------- */
+.section-pricing--content{
+    display: grid;
+    grid-template-columns: 4fr 1.5fr;
+    margin: 0 auto;
+    column-gap: 4.8rem;
+}
+/* Additional Services */
+.add-services{
+    background-color: #F5F5F5;
+    padding: 4.8rem 3.2rem;
+}
+.add-services--heading,
+.packages-heading{
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.50px;
+    color: #404C55;
+    margin-bottom: 4rem;
+}
+.add-serivces--list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+}
+.add-services--items{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    color: #404C55;
+}
+.add-services--icon,
+.package-icon{
+    width: 3rem;
+    height: 3rem;
+    color: #a4161a;
+}
+/* Packages */
+.packages-box{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4.8rem;
+}
+.package-card{
+    padding: 3.2em 3.2rem;
+    color: #404C55;
+    box-shadow: 0 2rem 3.8rem rgba(0, 0, 0, 0.06);
+    transition: all 0.5s;
+}
+.package-card:hover{
+    transform: translateY(-1.5rem);
+    box-shadow: 0 3.2rem 6.4rem rgba(0, 0, 0, 0.085);
+}
+.package-card-header{
+    text-align: center;
+    margin-bottom: 6.4rem;
+}
+.package-heading{
+    font-size: 2.4rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #a4161a;
+    margin-bottom: 3.2rem;
+}
+.package-subheading{
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 2.4rem;
+}
+.package-price span{
+    font-size: 1.6rem;
+}
+.package-price{
+    font-size: 4.4rem;
+    letter-spacing: 0.75px;
+}
+.package-list{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    line-height: 1.6;
+    margin-bottom: 3.2em;
+}
+.package-list--items{
+    display:flex;
+    gap: 1.6rem;
+    align-items:center;
+}
+.package-cta{
+    text-align: center;
+}
+.package-btn:link,
+.package-btn:visited{
+    padding: 1.2rem 2.4rem;
+    border-radius: 1000px;
+    background-color: #fff;
+    border: 2px solid #a4161a;
+    color: #a4161a;
+    transition: all 0.5s;
+}
+.package-btn:hover,
+.package-btn:active{
+    background-color: #a4161a;
+    color: #fff;
+}
+.platinum-pack{
+    border-top: 7px solid #a4161a;
+}
+.express-pack{
+    border-top: 7px solid #a4161a;
+}
+
+
