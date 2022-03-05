@@ -346,7 +346,8 @@ body{
     color: #404C55;
 }
 .add-services--icon,
-.package-icon{
+.package-icon,
+.icon-style{
     width: 3rem;
     height: 3rem;
     color: #a4161a;
@@ -468,7 +469,38 @@ body{
 /* ---------------------- */
 /* FAQs SECTION */
 /* ---------------------- */
-
+.accordion{
+    width: 100rem;
+    margin: 0 auto;
+    display: flex; 
+    flex-direction: column;
+    gap: 2.4rem;
+}
+.item{
+    padding: 2.4rem;
+    box-shadow: 0 0 3.2rem rgba(0,0,0, 0.1);
+}
+.item-question{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.faq-question{
+    color: #404C55;
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+.faq-text{
+    color: #404C55;
+    line-height: 1.8;
+    padding-top: 3.2rem;
+}
+.faq-content{
+    display: none;
+}
+.active-content .faq-content{
+    display: block;
+}
 
 /* ---------------------- */
 /* CTA SECTION */
