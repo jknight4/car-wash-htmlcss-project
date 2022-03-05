@@ -505,3 +505,17 @@ body{
 /* ---------------------- */
 /* CTA SECTION */
 /* ---------------------- */
+.cta{
+    background-image: linear-gradient(to right bottom, #731013, #CB1C21 );
+    
+    max-width: 100rem;
+    margin: 0 auto;
+    padding: 4.8rem 3.2rem;
+    color: #fff;
+    box-shadow: 0 2rem 3.2rem rgba(0,0,0, 0.2);
+}
+.cta-heading{
+    font-weight: 500;
+    font-size: 3.6rem;
+    letter-spacing: 0.75px;
+}
