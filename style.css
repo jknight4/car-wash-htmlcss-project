@@ -462,7 +462,7 @@ body{
 }
 .more-packages-link:hover,
 .more-packages-link:active{
-    border-bottom: none;
+    border-bottom: solid 2px #fff;
 }
 
 /* ---------------------- */
