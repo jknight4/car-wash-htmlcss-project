@@ -318,6 +318,7 @@ body{
     grid-template-columns: 4fr 1.5fr;
     margin: 0 auto;
     column-gap: 4.8rem;
+    margin-bottom: 2.4rem;
 }
 /* Additional Services */
 .add-services{
@@ -361,6 +362,11 @@ body{
     color: #404C55;
     box-shadow: 0 2rem 3.8rem rgba(0, 0, 0, 0.06);
     transition: all 0.5s;
+    display: flex; 
+    flex-direction: column;
+    gap: 6.4rem;
+    justify-content: space-between;
+
 }
 .package-card:hover{
     transform: translateY(-1.5rem);
@@ -396,7 +402,6 @@ body{
     flex-direction: column;
     gap: 1.6rem;
     line-height: 1.6;
-    margin-bottom: 3.2em;
 }
 .package-list--items{
     display:flex;
@@ -427,4 +432,44 @@ body{
     border-top: 7px solid #a4161a;
 }
 
+.section-package--info{
+    color: #404C55;
+    line-height: 1.6;
+    text-align: center;
+}
+.section-package--info p{
+    margin-bottom: 3.6rem;
+    font-size: 1.6rem;
+}
+.more-packages-link{
+    gap: 1.6rem;
+}
+.more-packages-link div{
+    display:flex;
+    align-items: center;
+    gap: .8rem;
+}
+.more-packages-link:link,
+.more-packages-link:visited{
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 500;
+    color: #a4161a;
+    font-size: 2.2rem;
+    border-bottom: solid 2px #a4161a;
+    transition: all 0.3s;
+    padding-bottom: 0.2rem;
+}
+.more-packages-link:hover,
+.more-packages-link:active{
+    border-bottom: none;
+}
 
+/* ---------------------- */
+/* FAQs SECTION */
+/* ---------------------- */
+
+
+/* ---------------------- */
+/* CTA SECTION */
+/* ---------------------- */
