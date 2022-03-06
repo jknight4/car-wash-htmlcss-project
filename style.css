@@ -507,15 +507,54 @@ body{
 /* ---------------------- */
 .cta{
     background-image: linear-gradient(to right bottom, #731013, #CB1C21 );
-    
     max-width: 100rem;
     margin: 0 auto;
     padding: 4.8rem 3.2rem;
     color: #fff;
     box-shadow: 0 2rem 3.2rem rgba(0,0,0, 0.2);
 }
+.cta-text-box{
+    display: flex;
+}
 .cta-heading{
     font-weight: 500;
     font-size: 3.6rem;
     letter-spacing: 0.75px;
+}
+.cta 
+button,
+input, 
+select, 
+textarea {
+    font-family: inherit;
+}
+.cta-form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+.cta-form label{
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+.cta-form input, 
+.cta-form select{
+    width: 100%;
+    padding: 1.2rem;
+    font-size: 1.8rem;
+    border: none;
+    color: #404C55;
+}
+.cta-form input::placeholder{
+    color: #aaa;
+}
+.checkbox-style label{
+    display: inline;
+
+}
+.checkbox-item{
+    display: flex;
+
 }

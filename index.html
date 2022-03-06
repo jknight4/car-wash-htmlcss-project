@@ -460,44 +460,50 @@
                             <option value="ultimate">Ultimate</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="checkbox-style">
                         <label for="form-services">Any additional services?</label>
-                            <div>
+                            <div class="checkbox-item">
                                 <input type="checkbox" id="add-services-1" name="add-services-1">
                                 <label for="add-services-1">Headlight Restoration</label>
                             </div>
-                            <div>
+                            <div class="checkbox-item">
                                 <input type="checkbox" id="add-services-2" name="add-services-2">
                                 <label for="add-services-2">Engine Detail</label>
                             </div>
-                            <div>
+                            <div class="checkbox-item">
                                 <input type="checkbox" id="add-services-3" name="add-services-3">
                                 <label for="add-services-3">Scratch Removal</label>
                             </div>
-                            <div>
+                            <div class="checkbox-item">
                                 <input type="checkbox" id="add-services-4" name="add-services-4">
                                 <label for="add-services-4">Clay Bar Treatment</label>
                             </div>
-                            <div>
+                            <div class="checkbox-item">
                                 <input type="checkbox" id="add-services-5" name="add-services-5">
-                                <label for="add-services-5">Odeor Removal Treatment</label>
+                                <label for="add-services-5">Odor Removal Treatment</label>
                             </div>
-                            <div>
+                            <div class="checkbox-item">
                                 <input type="checkbox" id="add-services-6" name="add-services-6">
                                 <label for="add-services-6">Ceramic Coating</label>
                             </div>
                     </div>
                     <div>
-                        <label for="meeting-time">Choose a time for your appointment:</label>
-                        <input type="datetime-local" id="meeting-time"
-                            name="meeting-time"
-                            min="2022-03-05T00:00" max="2023-01-01T00:00">
+                        <label for="date">Choose a date:</label>
+                        <input type="date" id="date"
+                            min="2022-03-05" max="2023-01-01">
+                    </div>
+                    <div>
+                        <label for="appt-time">Choose a time for your appointment:</label>
+                        <input type="time" id="appt-time"
+                            name="appt-time"
+                            min="2022-03-05T00:00" max="2023-01-01T00:00" required>
+                        <small>Hours are from 7am to 6pm</small>
                     </div>
                         
                     <div>
                         <label for="additional-comments">Any additonal comments/ requests</label>
                         <textarea id="additional-comments" name="additional-comments" row="50" cols="50"
-                        placeholder="Lorem ipsum dolor sit, amet consectetur adipisicing elit....">
+                            placeholder="Lorem ipsum dolor sit, amet consectetur adipisicing elit....">
                         </textarea>
                     </div>
 
