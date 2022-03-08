@@ -426,21 +426,26 @@
         <div class="cta">
             <div class="cta-text-box">
                 <p class="cta-heading">Schedule your appointment </p>
+
                 <form class="cta-form" action="#">
+
                     <div>
                         <label for="full-name">Full name</label>
                         <input id="full-name" type="text" placeholder="Jane Doe" required="">
                     </div>
-                    <div>
+
+                    <div class="cta-email">
                         <label for="email">Email address</label>
                         <input id="email" type="email" placeholder="me@example.com" required="">
                     </div>
-                    <div>
+
+                    <div class="cta-phone">
                         <label for="phone">Phone number</label>
                         <input id="phone" type="tel" placeholder="555-555-5555" required="">
                     </div>
-                    <div>
-                        <label for="car-type">What is your car type?</label>
+
+                    <div class="cta-cartype">
+                        <label for="car-type">What is your car type</label>
                         <select id="car-type" required="">
                             <option value="">--Please choose one option--</option>
                             <option value="sedan">Sedan</option>
@@ -449,6 +454,7 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
+
                     <div>
                         <label for="package">Select your desired package</label>
                         <select id="package" required="">
@@ -460,49 +466,54 @@
                             <option value="ultimate">Ultimate</option>
                         </select>
                     </div>
+
                     <div class="checkbox-style">
-                        <label for="form-services">Any additional services?</label>
+                        <label for="form-services">Any additional services</label>
+                        <div class="checkbox-list">
                             <div class="checkbox-item">
-                                <input type="checkbox" id="add-services-1" name="add-services-1">
-                                <label for="add-services-1">Headlight Restoration</label>
+                                <div><input type="checkbox" id="add-services-1" name="add-services-1"></div>
+                                <div><label class="checkbox-text" for="add-services-1">Headlight Restoration</label></div>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="add-services-2" name="add-services-2">
-                                <label for="add-services-2">Engine Detail</label>
+                                <div><input type="checkbox" id="add-services-2" name="add-services-2"></div>
+                                <div><label class="checkbox-text" for="add-services-2">Engine Detail</label></div>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="add-services-3" name="add-services-3">
-                                <label for="add-services-3">Scratch Removal</label>
+                                <div><input type="checkbox" id="add-services-3" name="add-services-3"></div>
+                                <div><label class="checkbox-text" for="add-services-3">Scratch Removal</label></div>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="add-services-4" name="add-services-4">
-                                <label for="add-services-4">Clay Bar Treatment</label>
+                                <div><input type="checkbox" id="add-services-4" name="add-services-4"></div>
+                                <div><label class="checkbox-text" for="add-services-4">Clay Bar Treatment</label></div>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="add-services-5" name="add-services-5">
-                                <label for="add-services-5">Odor Removal Treatment</label>
+                                <div><input type="checkbox" id="add-services-5" name="add-services-5"></div>
+                                <div><label class="checkbox-text" for="add-services-5">Odor Removal Treatment</label></div>
                             </div>
                             <div class="checkbox-item">
-                                <input type="checkbox" id="add-services-6" name="add-services-6">
-                                <label for="add-services-6">Ceramic Coating</label>
+                                <div><input type="checkbox" id="add-services-6" name="add-services-6"></div>
+                                <div><label class="checkbox-text" for="add-services-6">Ceramic Coating</label></div>
                             </div>
+                        </div>
                     </div>
+
                     <div>
-                        <label for="date">Choose a date:</label>
+                        <label for="date">Choose a date</label>
                         <input type="date" id="date"
                             min="2022-03-05" max="2023-01-01">
                     </div>
+
                     <div>
-                        <label for="appt-time">Choose a time for your appointment:</label>
+                        <label for="appt-time">Choose a time for your appointment</label>
                         <input type="time" id="appt-time"
                             name="appt-time"
                             min="2022-03-05T00:00" max="2023-01-01T00:00" required>
-                        <small>Hours are from 7am to 6pm</small>
+                            <small>( Hours are from 7am to 6pm )</small>
                     </div>
                         
-                    <div>
-                        <label for="additional-comments">Any additonal comments/ requests</label>
-                        <textarea id="additional-comments" name="additional-comments" row="50" cols="50"
+                    <div class="cta-additional-comments">
+                        <label for="additional-comments">Any additonal comments or requests</label>
+                        <textarea id="additional-comments" name="additional-comments"
                             placeholder="Lorem ipsum dolor sit, amet consectetur adipisicing elit....">
                         </textarea>
                     </div>
