@@ -609,3 +609,75 @@ small{
     color: #a4161a;
     background-color: #fff;
 }
+
+
+/* ---------------------- */
+/* FOOTER SECTION */
+/* ---------------------- */
+footer{
+    border-top: solid 1px #eee;
+    color: #767676;
+}
+.footer{
+    padding-top: 6.4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    width: 100%;
+    column-gap: 8rem;
+}
+.footer-company{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.footer-logo{
+    height:7rem;
+    width: auto;
+}
+.footer-link:link,
+.footer-link:visited{
+    color: #767676;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+.footer-link:active,
+.footer-link:hover{
+    color: #474747;
+}
+.social-media-logos{
+    margin-top: 3.6rem;
+    display:flex;
+    gap: 2.4rem;
+}
+.footer-social-logo{
+    height: 2.4rem;
+    width: 2.4rem;
+}
+.copyright-text{
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+.footer-contact-us{
+    height: 20rem;
+}
+.footer-header{
+    margin-bottom: 4.8rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #555;
+}
+.contacts{
+    font-style: normal;
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+.contacts p{
+    margin-bottom: 2.4rem;
+}
+.footer-list{
+    list-style: none;
+    display:flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    font-size: 1.6rem;
+}
