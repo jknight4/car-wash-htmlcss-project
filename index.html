@@ -11,6 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet"> 
 
 
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script defer src="script.js"></script>
 
     <title>Primetime Automotive Detailing</title>
 </head>
@@ -25,12 +29,12 @@
     </a>
     <nav class="main-nav">
         <ul class="main-nav-list">
-            <li><a class="main-nav-link" href="#">About</a></li>
-            <li><a class="main-nav-link" href="#">Testimonials</a></li>
-            <li><a class="main-nav-link" href="#">Gallery</a></li>
-            <li><a class="main-nav-link" href="#">Services</a></li>
-            <li><a class="main-nav-link" href="#">FAQs</a></li>
-            <li><a class="main-nav-link nav-cta" href="#">Book now</a></li>
+            <li><a class="main-nav-link" href="#about">About</a></li>
+            <li><a class="main-nav-link" href="#testimonials">Testimonials</a></li>
+            <li><a class="main-nav-link" href="#gallery">Gallery</a></li>
+            <li><a class="main-nav-link" href="#pricing">Services</a></li>
+            <li><a class="main-nav-link" href="#faqs">FAQs</a></li>
+            <li><a class="main-nav-link nav-cta" href="#cta">Book now</a></li>
         </ul>
     </nav>
     <button class="btn-mobile-nav">
@@ -56,7 +60,7 @@
                 Chesterfield and more. 
             </p>
             
-            <a class="btn hero-btn" href="#">Detail my car</a>
+            <a class="btn hero-btn" href="#cta">Detail my car</a>
         </div>
         <div class="hero-img-box">
             <img src="img/hero-img.jpg" alt="Black Range Rover" class="hero-img"/>
@@ -66,7 +70,7 @@
 <!-- *********************** -->
 <!-- ABOUT US SECTION  -->
 <!-- *********************** -->
-    <section class="section-about margin-bottom-lg">
+    <section class="section-about margin-bottom-lg" id="about">
         <div class="container margin-bottom-md">
             <span class="subheading">About us</span>
             <h2 class="heading-secondary">What we do at Primetime</h2>
@@ -98,7 +102,7 @@
 <!-- *********************** -->
 <!-- TESTIMONIALS SECTION -->
 <!-- *********************** -->
-    <section class="section-testimonials margin-bottom-xlg">
+    <section class="section-testimonials margin-bottom-xlg" id = "testimonials">
         <div class="container">
             <div class="center-content margin-bottom-lg">
                 <span class="subheading">Testimonials</span>
@@ -145,7 +149,7 @@
 <!-- *********************** -->
 <!-- GALLERY SECTION -->
 <!-- *********************** -->
-    <section class="section-gallery margin-bottom-xlg">
+    <section class="section-gallery margin-bottom-xlg" id="gallery">
         <div class="container">
             <div class="margin-bottom-md">
                 <span class="subheading">Gallery</span>
@@ -204,7 +208,7 @@
 <!-- *********************** -->
 <!-- PRICING / SERVICES SECTION -->
 <!-- *********************** -->
-<section class="section-pricing margin-bottom-xlg">
+<section class="section-pricing margin-bottom-xlg" id ="pricing" >
     <div class="container">
         <div class="margin-bottom-md">
             <span class="subheading">Services</span>
@@ -241,7 +245,7 @@
                     </ul>
                     </div>
                     <div class="package-cta">
-                        <a href="#" class="btn package-btn">Detail my car</a>
+                        <a href="#cta" class="btn package-btn">Detail my car</a>
                     </div>  
                 </div>
                 <div class="package-card platinum-pack">
@@ -292,7 +296,7 @@
                     </ul>
                 </div>
                     <div class="package-cta">
-                        <a href="#" class="btn package-btn">Detail my car</a>
+                        <a href="#cta" class="btn package-btn">Detail my car</a>
                     </div>  
                 </div>
             </div>
@@ -369,7 +373,7 @@
 <!-- *********************** -->
 <!-- FAQs SECTION-->
 <!-- *********************** -->
-<section class="section-faqs margin-bottom-xlg">
+<section class="section-faqs margin-bottom-xlg" id="faqs">
     <div class="container">
         <div class="margin-bottom-md">
             <span class="subheading">Frequently Asked Questions</span>
@@ -423,7 +427,7 @@
 <!-- *********************** -->
 <!-- CTA SECTION -->
 <!-- *********************** -->
-<section class="section-cta margin-bottom-xlg">
+<section class="section-cta margin-bottom-xlg" id="cta">
     <div class="container">
         <div class="margin-bottom-md">
             <span class="subheading">book now</span>
@@ -579,23 +583,17 @@
         <div class="footer-sitemap">
             <p class="footer-header">Site map</p>
             <ul class="footer-list">
-                <li><a href="#" class="footer-link">About us</a></li>
-                <li><a href="#" class="footer-link">Testimonials</a></li>
-                <li><a href="#" class="footer-link">Gallery</a></li>
-                <li><a href="#" class="footer-link">Services</a></li>
-                <li><a href="#" class="footer-link">FAQs</a></li>
-                <li><a href="#" class="footer-link">Detail my car</a></li>
+                <li><a href="#about" class="footer-link">About us</a></li>
+                <li><a href="#testimonials" class="footer-link">Testimonials</a></li>
+                <li><a href="#gallery" class="footer-link">Gallery</a></li>
+                <li><a href="#pricing" class="footer-link">Services</a></li>
+                <li><a href="#faqs" class="footer-link">FAQs</a></li>
+                <li><a href="#cta" class="footer-link">Detail my car</a></li>
             </ul>
         </div>
     
     </div>
 </footer>
-
-
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-<script defer src="script.js"></script>
 
 </body>
 </html>
