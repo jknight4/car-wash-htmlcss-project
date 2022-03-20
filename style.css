@@ -65,6 +65,14 @@ Default: 1000px
     margin: 0;
     box-sizing: border-box;
 }
+*:focus{
+    outline: none;
+    box-shadow: 0 0 0 0.8rem rgba(102, 7, 9, 0.5);
+}
+.cta *:focus{
+    outline: none;
+    box-shadow: 0 0 0 0.8rem rgb(245, 245, 245, 0.5);
+}
 html{
     font-size:62.5%;
     scroll-behavior: smooth;
