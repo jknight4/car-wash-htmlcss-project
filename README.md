@@ -15,7 +15,7 @@
     
     Desktop first approach
 
-## Wireframes / Preview Pictures
+## Wireframes
 
 ## Technologies 
     HTML, CSS, JavaScript
