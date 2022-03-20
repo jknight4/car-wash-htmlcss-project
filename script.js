@@ -36,3 +36,49 @@ allLinks.forEach(function(link){
 
     });
 });
+
+// Sticky navigation
+const sectionHeroEl = document.querySelector(".section-hero");
+const obs = new IntersectionObserver(function(entries){
+    const ent = entries[0]; 
+    console.log(ent);
+    if(ent.isIntersecting === false){
+        document.body.classList.add('sticky');
+    }
+
+    if(ent.isIntersecting){
+        document.body.classList.remove('sticky');
+    }
+}, {
+    // In the viewport
+    root: null,
+    threshold: 0,
+    rootMargin: "-80px",
+});
+obs.observe(sectionHeroEl);
+
+
+// FAQs Section, collapsible elements
+
+const accordion = document.getElementsByClassName("item");
+
+for (i=0; i<accordion.length; i++ ) {
+    accordion[i].addEventListener('click', function(){
+        this.classList.toggle('active-content');
+    });
+    };
+
+// const btnItemQuestion = document.querySelector(".item-question");
+// const itemContentEl = document.querySelector(".item");
+
+// btnItemQuestion.addEventListener('click', function(){
+//     itemContentEl.classList.add('.hide-content');
+// });
+
+// // // Make mobile navigation work
+// // const btnNavEl  = document.querySelector(".btn-mobile-nav");
+// // const headerEl = document.querySelector(".header");
+
+// // btnNavEl.addEventListener('click', function() {
+// //     headerEl.classList.toggle('nav-open');
+// // }) ;
