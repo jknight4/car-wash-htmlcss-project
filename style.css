@@ -289,6 +289,9 @@ body{
     width: 100%;
     height: auto;
 }
+.text-content{
+    color: #404C55;
+}
 
 
 
@@ -763,12 +766,12 @@ footer{
     /* Mobile Nav */
     .btn-mobile-nav{
         display: block;
+        cursor: pointer;
     }
     .main-nav{
         opacity: 0;
         pointer-events: none;
         visibility: hidden;
-        background-color: #fff;
         position: absolute;
         top: 0;
         left: 0;
@@ -779,6 +782,9 @@ footer{
         justify-content: center;
         transition: all 0.5s ease-in-out;
         transform: translateX(100%);
+    }
+    .main-nav li{
+        opacity: 0;
     }
     .main-nav-list{
         flex-direction: column;
@@ -794,6 +800,10 @@ footer{
         visibility: visible;
         z-index: 1;
         transform: translateX(0);
+        background-color: #fff;
+    }
+    .nav-open .main-nav li{
+        opacity: 1;
     }
     .nav-open .icon-mobile-nav[name="close-outline"] {
         display: block;
