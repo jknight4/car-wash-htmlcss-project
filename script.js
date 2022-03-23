@@ -67,18 +67,3 @@ for (i=0; i<accordion.length; i++ ) {
         this.classList.toggle('active-content');
     });
     };
-
-// const btnItemQuestion = document.querySelector(".item-question");
-// const itemContentEl = document.querySelector(".item");
-
-// btnItemQuestion.addEventListener('click', function(){
-//     itemContentEl.classList.add('.hide-content');
-// });
-
-// // // Make mobile navigation work
-// // const btnNavEl  = document.querySelector(".btn-mobile-nav");
-// // const headerEl = document.querySelector(".header");
-
-// // btnNavEl.addEventListener('click', function() {
-// //     headerEl.classList.toggle('nav-open');
-// // }) ;

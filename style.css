@@ -76,7 +76,7 @@ Default: 1000px
 html{
     font-size:62.5%;
     scroll-behavior: smooth;
-    scroll-padding-top: 8.5rem;
+    scroll-padding-top: 8rem;
 }
 body{
     font-family: "Rubik", sans-serif;
@@ -594,12 +594,15 @@ textarea {
 }
 .cta-form input, 
 .cta-form select{
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
     width: 100%;
     padding: 1.2rem;
     font-size: 1.8rem;
     border: none;
     color: #404C55;
 }
+
 .cta-form input::placeholder{
     color: #aaa;
 }
@@ -618,6 +621,25 @@ textarea {
     font-weight: 400;
     margin-bottom: 0;
     font-size: 1.6rem;
+}
+.checkbox{
+    background-color: #fff;
+    border: none;
+    border-radius: 0;
+    position: relative;
+}
+.checkbox:checked {
+    background-color: #767676;
+    box-shadow: inset 0 0 0 1px #fff; 
+}
+.checkbox:checked:after{
+    content: '\2714';
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
 }
 small{
     display: block;
