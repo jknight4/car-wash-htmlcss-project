@@ -31,7 +31,7 @@ https://primetimeautodetail.netlify.app
     HTML, CSS, JavaScript
 
 ## Status
-    Project is not completed
+    Project is completed (February 2022 - March 2022 )
 
 ## Credits
     Canva.com
