@@ -37,25 +37,17 @@ allLinks.forEach(function (link) {
     });
 });
 
-// Sticky navigation
-const sectionHeroEl = document.querySelector(".section-hero");
-const obs = new IntersectionObserver(function (entries) {
-    const ent = entries[0];
-    console.log(ent);
-    if (ent.isIntersecting === false) {
-        document.body.classList.add('sticky');
-    }
+// // Sticky navigation
+const scrollWatcher = document.createElement("div");
+headerEl.before(scrollWatcher);
 
-    if (ent.isIntersecting) {
-        document.body.classList.remove('sticky');
-    }
-}, {
-    // In the viewport
-    root: null,
-    threshold: 0,
-    rootMargin: "-80px",
+const obs = new IntersectionObserver(function (entries) {
+
+    document.body.classList.toggle('sticky', !entries[0].isIntersecting);
+
+
 });
-obs.observe(sectionHeroEl);
+obs.observe(scrollWatcher);
 
 
 // FAQs Section, collapsible elements
@@ -75,7 +67,7 @@ const multiStepForm = document.querySelector("[data-multi-step");
 const formScreens = [...multiStepForm.querySelectorAll("[data-step]")];
 
 let currentStep = formScreens.findIndex((step) => {
-    return step.classList.contains("active")
+    return step.classList.contains("active");
 });
 
 if (currentStep < 0) {
@@ -88,7 +80,7 @@ multiStepForm.addEventListener("click", (e) => {
     if (e.target.matches("[data-next]")) {
         incrementor = 1;
     } else if (e.target.matches("[data-back]")) {
-        incrementor = -1
+        incrementor = -1;
     }
 
     if (incrementor == null) return;

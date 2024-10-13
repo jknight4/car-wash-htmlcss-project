@@ -171,8 +171,9 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: #fff;
-    position: relative;
+    position: sticky;
     height: 10rem;
+    top: 0;
     padding: 0 2rem;
     margin-bottom: 8rem;
 }
@@ -241,23 +242,19 @@ body {
 /* STICKY NAV */
 .sticky .header {
     position: fixed;
-    top: 0;
-    bottom: 0;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.97);
     padding-top: 0;
     padding-bottom: 0;
-    height: 8rem;
     z-index: 999;
-    box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+    height: 8rem;
+    transition: all 500ms ease-in-out;
 }
+
 
 .sticky .logo {
-    height: 7rem;
-}
-
-.sticky .section-hero {
-    margin-top: 10rem;
+    transition: all 500ms ease-in-out;
+    height: 6rem;
 }
 
 /* ---------------------- */
