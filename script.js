@@ -4,6 +4,40 @@ const currentYear = new Date().getFullYear();
 yearEl.textContent = currentYear;
 
 
+// Form date validations
+const currentDate = new Date();
+const currentDateFormattedToArray = new Intl.DateTimeFormat("en-US").format(currentDate).split("/");
+const currentDateFormatted = [currentDateFormattedToArray[2], currentDateFormattedToArray[0], currentDateFormattedToArray[1]].join("-");
+console.log(currentDateFormatted);
+const maxDate = [currentDateFormattedToArray[2], increaseMonthBy2(currentDateFormattedToArray[0]), currentDateFormattedToArray[1]].join("-");
+
+const formDate = document.querySelector('input[name="date"]');
+formDate.setAttribute("min", currentDateFormatted);
+
+console.log(maxDate);
+formDate.setAttribute("max", maxDate);
+
+function increaseMonthBy2(month) {
+    let currentMonth = parseInt(month);
+    let increasedMonth;
+    if (currentMonth === 12) {
+        increasedMonth = 2;
+    } else {
+        increasedMonth = currentMonth + 2;
+
+        if (increasedMonth > 12) {
+            increasedMonth = 1;
+        }
+    }
+
+    if (increasedMonth <= 9) {
+        increasedMonth = 0 + increasedMonth.toString();
+    }
+
+    return increasedMonth.toString();
+}
+
+
 // Make mobile navigation work
 const btnNavEl = document.querySelector(".btn-mobile-nav");
 const headerEl = document.querySelector(".header");
