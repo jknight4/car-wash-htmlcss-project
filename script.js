@@ -65,6 +65,7 @@ for (i = 0; i < accordion.length; i++) {
 
 const multiStepForm = document.querySelector("[data-multi-step");
 const formScreens = [...multiStepForm.querySelectorAll("[data-step]")];
+const statusSteps = [...document.getElementsByClassName("cta-status-step")];
 
 let currentStep = formScreens.findIndex((step) => {
     return step.classList.contains("active");
@@ -73,6 +74,7 @@ let currentStep = formScreens.findIndex((step) => {
 if (currentStep < 0) {
     currentStep = 0;
     showCurrentStep();
+    showCurrentStatusStep();
 }
 
 multiStepForm.addEventListener("click", (e) => {
@@ -93,6 +95,7 @@ multiStepForm.addEventListener("click", (e) => {
     if (allValid) {
         currentStep += incrementor;
         showCurrentStep();
+        showCurrentStatusStep();
     }
 
     console.log(currentStep);
@@ -109,5 +112,12 @@ formScreens.forEach(step => {
 function showCurrentStep() {
     formScreens.forEach((step, index) => {
         step.classList.toggle("active", index === currentStep);
+    })
+}
+
+function showCurrentStatusStep() {
+
+    statusSteps.forEach((status, index) => {
+        status.classList.toggle("active-step", index <= currentStep);
     })
 }
