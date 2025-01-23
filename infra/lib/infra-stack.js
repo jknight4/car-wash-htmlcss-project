@@ -64,16 +64,30 @@ class InfraStack extends Stack {
       certificate: customCert,
     });
 
+    // new CodePipeline(this, "Pipeline", {
+    //   pipelineName: "PrimetimeAutoPipeline",
+    //   synth: new ShellStep("Sytnh", {
+    //     input: CodePipelineSource.gitHub(
+    //       "jknight4/car-wash-htmlcss-project",
+    //       "aws-cdk-deployment"
+    //     ),
+    //     commands: ["npm ci", "npm run build", "npx cdk synth"],
+    //   }),
+    //   gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
+    // });
+
     new CodePipeline(this, "Pipeline", {
       pipelineName: "PrimetimeAutoPipeline",
       synth: new ShellStep("Sytnh", {
-        input: CodePipelineSource.gitHub(
+        input: CodePipelineSource.connection(
           "jknight4/car-wash-htmlcss-project",
-          "aws-cdk-deployment"
+          "aws-cdk-deployment",
+          {
+            connectionArn:
+              "arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd",
+          }
         ),
-        commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
-      gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
     });
   }
 }
