@@ -68,7 +68,7 @@ class InfraStack extends Stack {
           "jknight4/car-wash-htmlcss-project",
           "aws-cdk-deployment"
         ),
-        commands: ["npx cdk synth"],
+        commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
       gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
     });
