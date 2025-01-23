@@ -61,7 +61,7 @@ class InfraStack extends Stack {
       certificate: customCert,
     });
 
-    const pipeline = new CodePipeline(this, "Pipeline", {
+    new CodePipeline(this, "Pipeline", {
       pipelineName: "PrimetimeAutoPipeline",
       synth: new ShellStep("Sytnh", {
         input: CodePipelineSource.gitHub(
@@ -70,7 +70,7 @@ class InfraStack extends Stack {
         ),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
-      gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
+      // gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
     });
   }
 }
