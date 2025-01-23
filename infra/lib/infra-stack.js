@@ -66,7 +66,7 @@ class InfraStack extends Stack {
       synth: new ShellStep("Sytnh", {
         input: CodePipelineSource.gitHub(
           "jknight4/car-wash-htmlcss-project",
-          "main"
+          "aws-cdk-deployment"
         ),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
