@@ -10,3 +10,5 @@ new InfraStack(app, "InfraStack", {
     region: process.env.CDK_DEFAULT_REGION,
   },
 });
+
+app.synth();

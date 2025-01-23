@@ -9,14 +9,17 @@ const {
   S3BucketOrigin,
   S3StaticWebsiteOrigin,
 } = require("aws-cdk-lib/aws-cloudfront-origins");
-const { CodePipeline } = require("aws-cdk-lib/aws-events-targets");
 const { Bucket } = require("aws-cdk-lib/aws-s3");
 const {
   BucketDeployment,
   Source,
   CacheControl,
 } = require("aws-cdk-lib/aws-s3-deployment");
-const { ShellStep, CodePipelineSource } = require("aws-cdk-lib/pipelines");
+const {
+  ShellStep,
+  CodePipelineSource,
+  CodePipeline,
+} = require("aws-cdk-lib/pipelines");
 
 class InfraStack extends Stack {
   /**
@@ -70,7 +73,7 @@ class InfraStack extends Stack {
         ),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
-      // gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
+      gitHubActionRoleArn: `arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd`,
     });
   }
 }
