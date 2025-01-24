@@ -76,7 +76,7 @@ class InfraStack extends Stack {
       pipelineName: "PrimetimeAutoPipeline",
       synth: new ShellStep("Sytnh", {
         input: source,
-        commands: ["npx cdk synth"],
+        commands: ["npm ci", "npm run build", "npx cdk synth"],
       }),
     });
   }
