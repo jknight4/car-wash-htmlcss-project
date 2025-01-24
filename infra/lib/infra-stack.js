@@ -42,7 +42,7 @@ class InfraStack extends Stack {
       destinationBucket: s3Bucket,
       sources: [Source.asset("../src")],
       cacheControl: [
-        CacheControl.fromString("max-age=0, non-cache, no-store"),
+        CacheControl.fromString("max-age=0, no-cache, no-store"),
         // CacheControl.maxAge(Duration.days(1)),
       ],
     });
@@ -70,6 +70,7 @@ class InfraStack extends Stack {
       {
         connectionArn:
           "arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd",
+        triggerOnPush: true,
       }
     );
     new CodePipeline(this, "Pipeline", {
