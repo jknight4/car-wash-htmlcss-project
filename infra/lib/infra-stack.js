@@ -42,8 +42,8 @@ class InfraStack extends Stack {
       destinationBucket: s3Bucket,
       sources: [Source.asset("../src")],
       cacheControl: [
-        // CacheControl.fromString("max-age=5")
-        CacheControl.maxAge(Duration.days(1)),
+        CacheControl.fromString("max-age=0, non-cache, no-store"),
+        // CacheControl.maxAge(Duration.days(1)),
       ],
     });
 
