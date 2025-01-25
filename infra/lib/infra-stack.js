@@ -69,8 +69,7 @@ class InfraStack extends Stack {
       "aws-cdk-deployment",
       {
         connectionArn:
-          "arn:aws:codeconnections:us-east-1:165442463601:connection/7b5bf453-74ba-433a-bf53-093715f39afd",
-        triggerOnPush: true,
+          "arn:aws:codeconnections:us-east-1:165442463601:connection/515074e3-b7a8-4e36-a9d3-534a0d1e1370",
       }
     );
     new CodePipeline(this, "Pipeline", {
