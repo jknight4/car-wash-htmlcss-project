@@ -4,6 +4,7 @@ const {
   Distribution,
   ViewerProtocolPolicy,
   AllowedMethods,
+  ErrorResponse,
 } = require("aws-cdk-lib/aws-cloudfront");
 const { S3BucketOrigin } = require("aws-cdk-lib/aws-cloudfront-origins");
 const { Bucket } = require("aws-cdk-lib/aws-s3");
@@ -55,6 +56,20 @@ class InfraStack extends Stack {
       defaultRootObject: "index.html",
       domainNames: ["primetimeauto.knightj.xyz"],
       certificate: customCert,
+      errorResponses: [
+        {
+          httpStatus: 404,
+          responseHttpStatus: 200,
+          responsePagePath: "/error-page.html",
+          ttl: Duration.days(10),
+        },
+        {
+          httpStatus: 403,
+          responseHttpStatus: 200,
+          responsePagePath: "/error-page.html",
+          ttl: Duration.days(10),
+        },
+      ],
     });
   }
 }
