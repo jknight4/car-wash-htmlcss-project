@@ -1,10 +1,9 @@
-const { Stack, RemovalPolicy } = require("aws-cdk-lib");
+const { Stack, RemovalPolicy, Duration } = require("aws-cdk-lib");
 const { Certificate } = require("aws-cdk-lib/aws-certificatemanager");
 const {
   Distribution,
   ViewerProtocolPolicy,
   AllowedMethods,
-  ErrorResponse,
 } = require("aws-cdk-lib/aws-cloudfront");
 const { S3BucketOrigin } = require("aws-cdk-lib/aws-cloudfront-origins");
 const { Bucket } = require("aws-cdk-lib/aws-s3");
