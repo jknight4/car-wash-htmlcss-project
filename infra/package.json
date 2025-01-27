@@ -1,6 +1,7 @@
 {
   "name": "infra",
   "version": "0.1.0",
+  "main":"lib/infra-stack.js",
   "bin": {
     "infra": "bin/infra.js"
   },

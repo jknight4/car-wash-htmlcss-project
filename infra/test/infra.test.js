@@ -1,17 +1,34 @@
-// const cdk = require('aws-cdk-lib');
-// const { Template } = require('aws-cdk-lib/assertions');
-// const Infra = require('../lib/infra-stack');
+const cdk = require("aws-cdk-lib");
+const { Template } = require("aws-cdk-lib/assertions");
+const { InfraStack } = require("../lib/infra-stack");
+const { ViewerProtocolPolicy } = require("aws-cdk-lib/aws-cloudfront");
 
-// example test. To run these tests, uncomment this file along with the
-// example resource in lib/infra-stack.js
-test('SQS Queue Created', () => {
-//   const app = new cdk.App();
-//   // WHEN
-//   const stack = new Infra.InfraStack(app, 'MyTestStack');
-//   // THEN
-//   const template = Template.fromStack(stack);
+describe("InfraStack", () => {
+  let app;
+  let stack;
+  let template;
 
-//   template.hasResourceProperties('AWS::SQS::Queue', {
-//     VisibilityTimeout: 300
-//   });
+  beforeAll(() => {
+    app = new cdk.App();
+    stack = new InfraStack(app, "TestInfraStack");
+    template = Template.fromStack(stack);
+  });
+
+  test("S3 Bucket is created", () => {
+    template.hasResourceProperties("AWS::S3::Bucket", {
+      VersioningConfiguration: {
+        Status: "Enabled",
+      },
+    });
+  });
+
+  test("CloudFront Distribution is created", () => {
+    template.hasResourceProperties("AWS::CloudFront::Distribution", {
+      DistributionConfig: {
+        DefaultCacheBehavior: {
+          ViewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        },
+      },
+    });
+  });
 });

@@ -21,7 +21,13 @@ class CICDStack extends Stack {
       pipelineName: "PrimetimeAutoPipeline",
       synth: new ShellStep("Sytnh", {
         input: source,
-        commands: ["cd infra", "npm ci", "npm run build", "npx cdk synth"],
+        commands: [
+          "cd infra",
+          "npm ci",
+          "npm run test",
+          "npm run build",
+          "npx cdk synth",
+        ],
         primaryOutputDirectory: "infra/cdk.out",
       }),
     });
