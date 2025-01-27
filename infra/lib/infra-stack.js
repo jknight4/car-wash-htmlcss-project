@@ -28,6 +28,7 @@ class InfraStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
       websiteIndexDocument: "index.html",
+      websiteErrorDocument: "error-page.html",
     });
 
     new BucketDeployment(this, "deployFilesS3Bucket", {

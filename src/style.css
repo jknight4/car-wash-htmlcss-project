@@ -162,7 +162,32 @@ body {
     text-align: center;
 }
 
+/* ---------------------- */
+/* Error Page */
+/* ---------------------- */
 
+.error-page{
+    margin-top: 4.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.error-page > h1 {
+    font-size: 7.4rem;
+    font-weight: 600;
+}
+
+.error-page > h2 {
+    font-size: 4.8rem;
+    font-weight: 500;
+    margin-bottom: 3.2rem;
+}
+
+.error-page > a {
+    font-size: 2.4rem;
+}
 /* ---------------------- */
 /* HEADER */
 /* ---------------------- */
