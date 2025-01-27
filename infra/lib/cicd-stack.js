@@ -17,6 +17,7 @@ class CICDStack extends Stack {
       }
     );
 
+    //test
     new CodePipeline(this, "Pipeline", {
       pipelineName: "PrimetimeAutoPipeline",
       synth: new ShellStep("Sytnh", {
