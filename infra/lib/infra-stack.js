@@ -1,25 +1,17 @@
-const { Stack, RemovalPolicy, Duration } = require("aws-cdk-lib");
+const { Stack, RemovalPolicy } = require("aws-cdk-lib");
 const { Certificate } = require("aws-cdk-lib/aws-certificatemanager");
 const {
   Distribution,
   ViewerProtocolPolicy,
   AllowedMethods,
 } = require("aws-cdk-lib/aws-cloudfront");
-const {
-  S3BucketOrigin,
-  S3StaticWebsiteOrigin,
-} = require("aws-cdk-lib/aws-cloudfront-origins");
+const { S3BucketOrigin } = require("aws-cdk-lib/aws-cloudfront-origins");
 const { Bucket } = require("aws-cdk-lib/aws-s3");
 const {
   BucketDeployment,
   Source,
   CacheControl,
 } = require("aws-cdk-lib/aws-s3-deployment");
-const {
-  ShellStep,
-  CodePipelineSource,
-  CodePipeline,
-} = require("aws-cdk-lib/pipelines");
 
 class InfraStack extends Stack {
   /**
@@ -50,7 +42,7 @@ class InfraStack extends Stack {
     const customCert = Certificate.fromCertificateArn(
       this,
       "customCert",
-      "arn:aws:acm:us-east-1:165442463601:certificate/6fec3492-fffd-4e8d-880f-52eedd0786b1"
+      `arn:aws:acm:${this.region}:${this.account}:certificate/6fec3492-fffd-4e8d-880f-52eedd0786b1`
     );
 
     new Distribution(this, "staticWebDistribution", {
@@ -62,23 +54,6 @@ class InfraStack extends Stack {
       defaultRootObject: "index.html",
       domainNames: ["primetimeauto.knightj.xyz"],
       certificate: customCert,
-    });
-
-    const source = CodePipelineSource.connection(
-      "jknight4/car-wash-htmlcss-project",
-      "aws-cdk-deployment",
-      {
-        connectionArn:
-          "arn:aws:codeconnections:us-east-1:165442463601:connection/515074e3-b7a8-4e36-a9d3-534a0d1e1370",
-      }
-    );
-    new CodePipeline(this, "Pipeline", {
-      pipelineName: "PrimetimeAutoPipeline",
-      synth: new ShellStep("Sytnh", {
-        input: source,
-        commands: ["cd infra", "npm ci", "npm run build", "npx cdk synth"],
-        primaryOutputDirectory: "infra/cdk.out",
-      }),
     });
   }
 }
