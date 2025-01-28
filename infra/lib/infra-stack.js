@@ -54,7 +54,7 @@ class InfraStack extends Stack {
         origin: S3BucketOrigin.withOriginAccessControl(s3Bucket),
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: CachePolicy.CACHING_OPTIMIZED,
+        cachePolicy: CachePolicy.CACHING_DISABLED,
       },
       defaultRootObject: "index.html",
       domainNames: ["primetimeauto.knightj.xyz"],
