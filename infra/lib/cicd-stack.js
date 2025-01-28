@@ -1,5 +1,10 @@
 const { Stack } = require("aws-cdk-lib");
 const {
+  ServicePrincipal,
+  Role,
+  ManagedPolicy,
+} = require("aws-cdk-lib/aws-iam");
+const {
   ShellStep,
   CodePipelineSource,
   CodePipeline,
@@ -17,24 +22,32 @@ class CICDStack extends Stack {
       }
     );
 
+    const pipelineRole = new Role(this, "PipelineRole", {
+      assumedBy: new ServicePrincipal("codepipeline.amazonaws.com"),
+      managedPolicies: [
+        ManagedPolicy.fromAwsManagedPolicyName("AWSCodePipeline_FullAccess"),
+      ],
+    });
+
     const pipeline = new CodePipeline(this, "Pipeline", {
       pipelineName: "PrimetimeAutoPipeline",
-      synth: new ShellStep("Sytnh", {
+      synth: new ShellStep("Synth", {
         input: source,
         commands: [
+          "npm install -g aws-cdk",
           "cd infra",
           "npm ci",
           "npm run test",
           "npm run build",
+          "npx cdk bootstrap",
           "npx cdk synth InfraStack",
           "npx cdk synth CICDStack",
-          "npm deploy InfraStack",
+          "npx cdk deploy --all",
         ],
         primaryOutputDirectory: "infra/cdk.out",
       }),
+      role: pipelineRole,
     });
-
-    // pipeline.addStage({});
   }
 }
 
