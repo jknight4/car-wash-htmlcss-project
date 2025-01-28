@@ -58,13 +58,13 @@ class InfraStack extends Stack {
       errorResponses: [
         {
           httpStatus: 404,
-          responseHttpStatus: 200,
+          responseHttpStatus: 404,
           responsePagePath: "/error-page.html",
           ttl: Duration.days(10),
         },
         {
           httpStatus: 403,
-          responseHttpStatus: 200,
+          responseHttpStatus: 404,
           responsePagePath: "/error-page.html",
           ttl: Duration.days(10),
         },
