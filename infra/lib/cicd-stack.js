@@ -23,7 +23,7 @@ class CICDStack extends Stack {
     );
 
     const pipelineRole = new Role(this, "PipelineRole", {
-      assumedBy: new ServicePrincipal("codepipeline.amazonaws.com"),
+      assumedBy: new ServicePrincipal("codebuild.amazonaws.com"),
       managedPolicies: [
         ManagedPolicy.fromAwsManagedPolicyName("AWSCodePipeline_FullAccess"),
       ],
