@@ -4,6 +4,7 @@ const {
   Distribution,
   ViewerProtocolPolicy,
   AllowedMethods,
+  CachePolicy,
 } = require("aws-cdk-lib/aws-cloudfront");
 const { S3BucketOrigin } = require("aws-cdk-lib/aws-cloudfront-origins");
 const { Bucket } = require("aws-cdk-lib/aws-s3");
@@ -35,7 +36,9 @@ class InfraStack extends Stack {
       destinationBucket: s3Bucket,
       sources: [Source.asset("../src")],
       cacheControl: [
-        CacheControl.fromString("max-age=0, no-cache, no-store"),
+        CacheControl.fromString(
+          "max-age=0, no-cache, no-store, must-revalidate"
+        ),
         // CacheControl.maxAge(Duration.days(1)),
       ],
     });
@@ -51,6 +54,7 @@ class InfraStack extends Stack {
         origin: S3BucketOrigin.withOriginAccessControl(s3Bucket),
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        cachePolicy: CachePolicy.CACHING_OPTIMIZED,
       },
       defaultRootObject: "index.html",
       domainNames: ["primetimeauto.knightj.xyz"],
