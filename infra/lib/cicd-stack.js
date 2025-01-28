@@ -28,6 +28,7 @@ class CICDStack extends Stack {
           "npm run build",
           "npx cdk synth InfraStack",
           "npx cdk synth CICDStack",
+          "npx cdk deploy --all",
         ],
         primaryOutputDirectory: "infra/cdk.out",
       }),
