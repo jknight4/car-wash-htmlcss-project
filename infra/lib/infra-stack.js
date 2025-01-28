@@ -52,20 +52,20 @@ class InfraStack extends Stack {
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
-      defaultRootObject: "index.html",
+      // defaultRootObject: "index.html",
       domainNames: ["primetimeauto.knightj.xyz"],
       certificate: customCert,
       errorResponses: [
         {
           httpStatus: 404,
           responseHttpStatus: 404,
-          responsePagePath: "/error-page.html",
+          responsePagePath: "../error-page.html",
           ttl: Duration.days(10),
         },
         {
           httpStatus: 403,
           responseHttpStatus: 404,
-          responsePagePath: "/error-page.html",
+          responsePagePath: "../error-page.html",
           ttl: Duration.days(10),
         },
       ],
