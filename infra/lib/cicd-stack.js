@@ -34,7 +34,7 @@ class CICDStack extends Stack {
       }),
     });
 
-    pipeline.addStage({});
+    // pipeline.addStage({});
   }
 }
 
