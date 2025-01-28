@@ -17,7 +17,7 @@ class CICDStack extends Stack {
       }
     );
 
-    new CodePipeline(this, "Pipeline", {
+    const pipeline = new CodePipeline(this, "Pipeline", {
       pipelineName: "PrimetimeAutoPipeline",
       synth: new ShellStep("Sytnh", {
         input: source,
@@ -28,11 +28,13 @@ class CICDStack extends Stack {
           "npm run build",
           "npx cdk synth InfraStack",
           "npx cdk synth CICDStack",
-          "npx cdk deploy --all",
+          "npm deploy InfraStack",
         ],
         primaryOutputDirectory: "infra/cdk.out",
       }),
     });
+
+    pipeline.addStage({});
   }
 }
 
