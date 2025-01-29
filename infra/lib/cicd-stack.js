@@ -17,12 +17,6 @@ const { Pipeline, Artifact } = require("aws-cdk-lib/aws-codepipeline");
 const { AppStage } = require("../lib/app-stage");
 
 class CICDStack extends Stack {
-  /**
-   *
-   * @param {Construct} scope
-   * @param {string} id
-   * @param {StackProps=} props
-   */
   constructor(scope, id, props) {
     super(scope, id, props);
 
@@ -62,8 +56,8 @@ class CICDStack extends Stack {
           "npm ci",
           "npm run test",
           "npm run build",
-          "npx cdk synth InfraStack",
-          "npx cdk synth CICDStack",
+          "npx cdk synth Prod/InfraStack",
+          // "npx cdk synth CICDStack",
         ],
         primaryOutputDirectory: "infra/cdk.out",
       }),
