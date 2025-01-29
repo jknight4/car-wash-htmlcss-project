@@ -63,7 +63,7 @@ class CICDStack extends Stack {
       }),
     });
 
-    pipeline.addStage(new AppStage(this, "DeployStage"));
+    pipeline.addStage(new AppStage(this, "DeployStage", props));
     // const lowLevelPipeline = new Pipeline(this, "LowLevelPipeline", {
     //   pipelineName: "LowLevelPipeline",
     // });

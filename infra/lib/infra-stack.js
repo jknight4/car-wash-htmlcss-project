@@ -25,6 +25,8 @@ class InfraStack extends Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
+    console.log("Stack env", this.account.toString(), this.region.toString());
+
     const s3Bucket = new Bucket(this, "s3Bucket", {
       versioned: true,
       removalPolicy: RemovalPolicy.DESTROY,
@@ -81,7 +83,7 @@ class InfraStack extends Stack {
     const zoneName = "knightj.xyz";
 
     const hostedZone = HostedZone.fromLookup(this, "HostedZone", {
-      zoneName,
+      domainName: `${zoneName}`,
     });
 
     new CnameRecord(this, "CnameApiRecord", {
