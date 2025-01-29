@@ -13,6 +13,7 @@ const {
   Source,
   CacheControl,
 } = require("aws-cdk-lib/aws-s3-deployment");
+const { HostedZone, CnameRecord } = require("aws-cdk-lib/aws-route53");
 
 class InfraStack extends Stack {
   /**
@@ -49,6 +50,8 @@ class InfraStack extends Stack {
       `arn:aws:acm:${this.region}:${this.account}:certificate/6fec3492-fffd-4e8d-880f-52eedd0786b1`
     );
 
+    const domainName = "primetimeauto.knightj.xyz";
+
     new Distribution(this, "staticWebDistribution", {
       defaultBehavior: {
         origin: S3BucketOrigin.withOriginAccessControl(s3Bucket),
@@ -57,7 +60,7 @@ class InfraStack extends Stack {
         cachePolicy: CachePolicy.CACHING_DISABLED,
       },
       defaultRootObject: "index.html",
-      domainNames: ["primetimeauto.knightj.xyz"],
+      domainNames: [`${domainName}`],
       certificate: customCert,
       errorResponses: [
         {
@@ -73,6 +76,18 @@ class InfraStack extends Stack {
           ttl: Duration.days(10),
         },
       ],
+    });
+
+    const zoneName = "knightj.xyz";
+
+    const hostedZone = HostedZone.fromLookup(this, "HostedZone", {
+      zoneName,
+    });
+
+    new CnameRecord(this, "CnameApiRecord", {
+      recordName: `${domainName}`,
+      domainName: `${domainName}`,
+      zone: hostedZone,
     });
   }
 }
