@@ -9,7 +9,12 @@ describe("CICDStack", () => {
 
   beforeAll(() => {
     app = new cdk.App();
-    stack = new CICDStack(app, "TestCICDStack");
+    stack = new CICDStack(app, "TestCICDStack", {
+      env: {
+        account: "mock-account-id",
+        region: "us-east-1",
+      },
+    });
     template = Template.fromStack(stack);
   });
 
