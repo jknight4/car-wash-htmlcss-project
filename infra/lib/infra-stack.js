@@ -88,7 +88,7 @@ class InfraStack extends Stack {
 
     new CnameRecord(this, "CnameApiRecord", {
       recordName: `${domainName}`,
-      domainName: `${cloudFrontDist.domainName}`,
+      domainName: `${cloudFrontDist.distributionDomainName}`,
       zone: hostedZone,
     });
   }
