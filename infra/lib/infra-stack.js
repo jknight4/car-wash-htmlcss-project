@@ -54,7 +54,7 @@ class InfraStack extends Stack {
 
     const domainName = "primetimeauto.knightj.xyz";
 
-    new Distribution(this, "staticWebDistribution", {
+    const cloudFrontDist = new Distribution(this, "staticWebDistribution", {
       defaultBehavior: {
         origin: S3BucketOrigin.withOriginAccessControl(s3Bucket),
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
@@ -88,7 +88,7 @@ class InfraStack extends Stack {
 
     new CnameRecord(this, "CnameApiRecord", {
       recordName: `${domainName}`,
-      domainName: `${domainName}`,
+      domainName: `${cloudFrontDist.domainName}`,
       zone: hostedZone,
     });
   }
