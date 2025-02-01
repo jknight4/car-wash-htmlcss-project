@@ -11,7 +11,7 @@ class CICDStack extends Stack {
     super(scope, id, props);
 
     const repoName = "jknight4/car-wash-htmlcss-project";
-    const branchName = "aws-cdk-deployment";
+    const branchName = "main";
     const outputDirectory = "infra/cdk.out";
 
     //Connect to GitHub
