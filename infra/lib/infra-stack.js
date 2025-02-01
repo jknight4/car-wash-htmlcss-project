@@ -16,25 +16,25 @@ const {
 const { HostedZone, CnameRecord } = require("aws-cdk-lib/aws-route53");
 
 class InfraStack extends Stack {
-  /**
-   *
-   * @param {Construct} scope
-   * @param {string} id
-   * @param {StackProps=} props
-   */
   constructor(scope, id, props) {
     super(scope, id, props);
 
-    console.log("Stack env", this.account.toString(), this.region.toString());
+    const domainName = "primetimeauto.knightj.xyz";
+    const indexPage = "index.html";
+    const errorPage = "error-page.html";
+    const zoneName = "knightj.xyz";
+    const zoneId = "Z021012427XAF7I60WUZT";
 
+    // S3 Bucket
     const s3Bucket = new Bucket(this, "s3Bucket", {
       versioned: true,
       removalPolicy: RemovalPolicy.DESTROY,
       autoDeleteObjects: true,
-      websiteIndexDocument: "index.html",
-      websiteErrorDocument: "error-page.html",
+      websiteIndexDocument: indexPage,
+      websiteErrorDocument: errorPage,
     });
 
+    // Deploy Files to S3
     new BucketDeployment(this, "deployFilesS3Bucket", {
       destinationBucket: s3Bucket,
       sources: [Source.asset("../src")],
@@ -42,53 +42,52 @@ class InfraStack extends Stack {
         CacheControl.fromString(
           "max-age=0, no-cache, no-store, must-revalidate"
         ),
-        // CacheControl.maxAge(Duration.days(1)),
       ],
     });
 
+    // SSL Cert for Cloudfront
     const customCert = Certificate.fromCertificateArn(
       this,
       "customCert",
       `arn:aws:acm:${this.region}:${this.account}:certificate/6fec3492-fffd-4e8d-880f-52eedd0786b1`
     );
 
-    const domainName = "primetimeauto.knightj.xyz";
-
+    // Cloudfront Distribution
     const cloudFrontDist = new Distribution(this, "staticWebDistribution", {
       defaultBehavior: {
         origin: S3BucketOrigin.withOriginAccessControl(s3Bucket),
         allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        cachePolicy: CachePolicy.CACHING_DISABLED,
+        cachePolicy: CachePolicy.CACHING_OPTIMIZED,
       },
-      defaultRootObject: "index.html",
+      defaultRootObject: indexPage,
       domainNames: [`${domainName}`],
       certificate: customCert,
       errorResponses: [
         {
           httpStatus: 404,
           responseHttpStatus: 404,
-          responsePagePath: "/error-page.html",
+          responsePagePath: `/${errorPage}`,
           ttl: Duration.days(10),
         },
         {
           httpStatus: 403,
           responseHttpStatus: 404,
-          responsePagePath: "/error-page.html",
+          responsePagePath: `/${errorPage}`,
           ttl: Duration.days(10),
         },
       ],
     });
 
-    const zoneName = "knightj.xyz";
-
-    const hostedZone = HostedZone.fromLookup(this, "HostedZone", {
-      domainName: `${zoneName}`,
+    // Route 53 - insert record
+    const hostedZone = HostedZone.fromHostedZoneAttributes(this, "HostedZone", {
+      hostedZoneId: zoneId,
+      zoneName: zoneName,
     });
 
     new CnameRecord(this, "CnameApiRecord", {
-      recordName: `${domainName}`,
-      domainName: `${cloudFrontDist.distributionDomainName}`,
+      recordName: domainName,
+      domainName: cloudFrontDist.distributionDomainName,
       zone: hostedZone,
     });
   }

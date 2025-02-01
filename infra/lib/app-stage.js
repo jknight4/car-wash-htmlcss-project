@@ -1,12 +1,9 @@
 const { InfraStack } = require("./infra-stack");
-// const { CICDStack } = require("./cicd-stack");
 const { Stage } = require("aws-cdk-lib");
 
 class AppStage extends Stage {
   constructor(scope, id, props) {
     super(scope, id, props);
-
-    console.log(props);
 
     new InfraStack(this, "InfraStack", props);
   }
