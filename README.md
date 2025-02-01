@@ -1,4 +1,4 @@
-# Static web site deployed using AWS
+# Static web site deployed to AWS
 
     HTML/CSS/JS website for a fictitious automotive detailing business, deployed on AWS using S3 and CloudFront
 
@@ -37,6 +37,12 @@
     At the end of 2024, I wanted to gain more experience with AWS, so I decided to migrate from Netlify to AWS
 
 ## Infrastructure
+    I used AWS CDK to provision various resources 
+    (S3 Bucket, CloudFront Distribution, CodePipelines, Inserting a DNS record).
+    
+    Setup automated CI/CD pipeline with CodePipelines that is triggered by GitHub Commits to the main branch.
+    
+    Integrated infrastucture tests within the pipeline
 
 ## Wireframes
 
