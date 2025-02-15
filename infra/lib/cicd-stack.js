@@ -11,7 +11,7 @@ class CICDStack extends Stack {
     super(scope, id, props);
 
     const repoName = "jknight4/car-wash-htmlcss-project";
-    const branchName = "main";
+    const branchName = "save-form-impl";
     const outputDirectory = "infra/cdk.out";
 
     //Connect to GitHub
@@ -29,6 +29,7 @@ class CICDStack extends Stack {
           "npm ci",
           "npm run test",
           "npx cdk synth Prod/InfraStack",
+          "npx cdk synth Prod/PersistenceStack",
         ],
         primaryOutputDirectory: outputDirectory,
       }),
