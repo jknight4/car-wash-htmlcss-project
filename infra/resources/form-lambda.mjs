@@ -32,7 +32,6 @@ export const handler = async (event) => {
   let body;
   let statusCode = 200;
   const headers = {
-    "Content-Type": "application/json",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
     "Access-Control-Allow-Origin": "https://primetimeauto.knightj.xyz",
     "Access-Control-Allow-Methods": "OPTIONS, PUT",
