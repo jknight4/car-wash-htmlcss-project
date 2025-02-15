@@ -33,6 +33,9 @@ export const handler = async (event) => {
   let statusCode = 200;
   const headers = {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Origin": "https://primetimeauto.knightj.xyz",
+    "Access-Control-Allow-Methods": "OPTIONS, PUT",
   };
   let contactFormData = JSON.parse(event.body);
   const persistenceApiEndpoint = process.env.PERSISTENCE_API;
