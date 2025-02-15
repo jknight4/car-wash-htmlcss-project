@@ -42,6 +42,8 @@ class FormServiceStack extends Stack {
           "Content-Type",
           "Authorization",
           "Access-Control-Allow-Origin",
+          "Access-Control-Allow-Headers",
+          "Access-Control-Allow-Methods",
         ],
       },
       allowOrigins: ["https://primetimeauto.knightj.xyz"],
