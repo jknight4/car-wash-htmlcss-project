@@ -8,8 +8,14 @@ class AppStage extends Stage {
     super(scope, id, props);
 
     new InfraStack(this, "InfraStack", props);
-    new PersistenceStack(this, "PersistenceStack", props);
-    new FormServiceStack(this, "FormServiceStack", props);
+    const persistenceStack = new PersistenceStack(
+      this,
+      "PersistenceStack",
+      props
+    );
+    const formStack = new FormServiceStack(this, "FormServiceStack", props);
+
+    formStack.addDependency(persistenceStack);
   }
 }
 
