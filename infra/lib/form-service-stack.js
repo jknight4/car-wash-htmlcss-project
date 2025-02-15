@@ -37,7 +37,7 @@ class FormServiceStack extends Stack {
 
     const httpApi = new HttpApi(this, "FormServiceHttpApi", {
       corsPreflight: {
-        allowMethods: [CorsHttpMethod.PUT],
+        allowMethods: [CorsHttpMethod.PUT, CorsHttpMethod.OPTIONS],
         allowHeaders: ["Content-Type", "Authroization"],
       },
       allowOrigins: ["https://primetimeauto.knightj.xyz"],
