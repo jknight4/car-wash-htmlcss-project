@@ -168,4 +168,29 @@ function showCurrentStatusStep() {
   statusSteps.forEach((status, index) => {
     status.classList.toggle("active-step", index <= currentStep);
   });
+
+  const btnSubmit = document.getElementById("form-submit");
+  const form = document.querySelector(".cta-form");
+  const formData = new FormData(form, btnSubmit);
+
+  btnSubmit.addEventListener("click", async (e) => {
+    e.preventDefault();
+    console.log(formData.toString());
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const API = "https://57qs766vl5.execute-api.us-east-1.amazonaws.com/form";
+
+    const response = await fetch(API, {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      console.log(response.blob);
+    }
+  });
 }
