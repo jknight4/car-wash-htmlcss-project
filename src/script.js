@@ -102,7 +102,6 @@ const obs = new IntersectionObserver(function (entries) {
 obs.observe(scrollWatcher);
 
 // FAQs Section, collapsible elements
-
 const accordion = document.getElementsByClassName("item");
 
 for (i = 0; i < accordion.length; i++) {
@@ -112,7 +111,8 @@ for (i = 0; i < accordion.length; i++) {
 }
 
 // Form
-
+const form = document.querySelector(".cta-form");
+const btnSubmit = document.getElementById("form-submit");
 const multiStepForm = document.querySelector("[data-multi-step");
 const formScreens = [...multiStepForm.querySelectorAll("[data-step]")];
 const statusSteps = [...document.getElementsByClassName("cta-status-step")];
@@ -137,18 +137,29 @@ multiStepForm.addEventListener("click", (e) => {
 
   if (incrementor == null) return;
 
-  const inputs = [...formScreens[currentStep].querySelectorAll("input")];
+  const inputs = [
+    ...formScreens[currentStep].querySelectorAll("input"),
+    ...formScreens[currentStep].querySelectorAll("select"),
+  ];
+
+  console.log(inputs);
+
   const allValid = inputs.every((input) => input.reportValidity());
 
-  console.log(allValid);
+  console.log("Did Form Screen pass Validation:", allValid);
 
   if (allValid) {
+    console.log("hi", currentStep);
+    if (currentStep === 2) {
+      sendData(new FormData(form));
+    }
+
     currentStep += incrementor;
     showCurrentStep();
     showCurrentStatusStep();
   }
 
-  console.log(currentStep);
+  console.log("Current form screen step:", currentStep);
 });
 
 formScreens.forEach((step) => {
@@ -168,29 +179,30 @@ function showCurrentStatusStep() {
   statusSteps.forEach((status, index) => {
     status.classList.toggle("active-step", index <= currentStep);
   });
+}
 
-  const btnSubmit = document.getElementById("form-submit");
-  const form = document.querySelector(".cta-form");
-  const formData = new FormData(form, btnSubmit);
+btnSubmit.addEventListener("click", async (e) => {
+  e.preventDefault();
+});
 
-  btnSubmit.addEventListener("click", async (e) => {
-    e.preventDefault();
-    console.log(formData.toString());
+async function sendData(formData) {
+  const additionalServices = formData.getAll("additionalServices");
+  formData.append("addServices", additionalServices);
+  formData.delete("additionalServices");
 
-    const headers = {
-      "Content-Type": "application/json",
-    };
+  console.log(JSON.stringify(Object.fromEntries(formData)));
+  const api = "https://upjuxt4vb0.execute-api.us-east-1.amazonaws.com/form";
 
-    const API = "https://57qs766vl5.execute-api.us-east-1.amazonaws.com/form";
-
-    const response = await fetch(API, {
-      method: "PUT",
-      headers: headers,
-      body: JSON.stringify(formData),
-    });
-
-    if (!response.ok) {
-      console.log(response.blob);
-    }
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const response = await fetch(api, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(formData),
   });
+
+  if (!response.ok) {
+    console.log(response.blob);
+  }
 }

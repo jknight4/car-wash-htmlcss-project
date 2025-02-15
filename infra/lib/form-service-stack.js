@@ -3,7 +3,11 @@ const { Function, Runtime, Code } = require("aws-cdk-lib/aws-lambda");
 const {
   HttpLambdaIntegration,
 } = require("aws-cdk-lib/aws-apigatewayv2-integrations");
-const { HttpApi, HttpMethod } = require("aws-cdk-lib/aws-apigatewayv2");
+const {
+  HttpApi,
+  HttpMethod,
+  CorsHttpMethod,
+} = require("aws-cdk-lib/aws-apigatewayv2");
 
 const path = require("path");
 
@@ -31,7 +35,12 @@ class FormServiceStack extends Stack {
       formServiceLambda
     );
 
-    const httpApi = new HttpApi(this, "FormServiceHttpApi");
+    const httpApi = new HttpApi(this, "FormServiceHttpApi", {
+      corsPreflight: {
+        allowMethods: [CorsHttpMethod.PUT],
+      },
+      allowOrigins: ["*"],
+    });
 
     httpApi.addRoutes({
       path: formPath,

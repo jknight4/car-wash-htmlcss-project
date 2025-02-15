@@ -6,6 +6,7 @@ const ValueType = {
   TIME: "time",
   TEXT: "text",
   SERVICES: "services",
+  ADD_SERVICES: "addServices",
 };
 
 const ACCEPTABLE_CAR_TYPES = ["sedan", "suv", "pickup truck", "other"];
@@ -19,12 +20,12 @@ const ACCEPTABLE_PACKAGES = [
 ];
 
 const ACCEPTABLE_ADD_SERVICES = [
-  "headlight restoration",
-  "engine detail",
-  "scratch removal",
-  "clay bar treatment",
-  "odor removal treatment",
-  "ceramic coating",
+  "headlightRestoration",
+  "engineDetail",
+  "scratchRemoval",
+  "clayBarTreatment",
+  "odorRemovalTreatment",
+  "ceramicCoating",
 ];
 
 export const handler = async (event) => {
@@ -33,34 +34,56 @@ export const handler = async (event) => {
   const headers = {
     "Content-Type": "application/json",
   };
-  let contactData = JSON.parse(event.body);
+  let contactFormData = JSON.parse(event.body);
   const persistenceApiEndpoint = process.env.PERSISTENCE_API;
 
   try {
-    validateField(contactData.name, ValueType.NAME, 2, 70);
-    validateField(contactData.email, ValueType.EMAIL, 3, 320);
-    validateField(contactData.phone, ValueType.PHONE, 7, 15);
-    validateField(contactData.date, ValueType.DATE, 0, 25);
-    validateField(contactData.time, ValueType.TIME, 0, 25);
+    validateField(contactFormData.name, ValueType.NAME, 2, 70);
+    validateField(contactFormData.email, ValueType.EMAIL, 3, 320);
+    validateField(contactFormData.phone, ValueType.PHONE, 7, 15);
+    validateField(contactFormData.date, ValueType.DATE, 0, 10);
+    validateField(contactFormData.time, ValueType.TIME, 0, 6);
 
-    if (contactData.comments != null) {
-      validateField(contactData.comments, ValueType.TEXT, 0, 250);
+    if (contactFormData.comments != null) {
+      validateField(contactFormData.comments, ValueType.TEXT, 0, 250);
     }
 
-    validateServices(contactData.carType, ACCEPTABLE_CAR_TYPES);
+    validateServices(
+      contactFormData.carType,
+      ValueType.SERVICES,
+      ACCEPTABLE_CAR_TYPES
+    );
 
-    validateServices(contactData.detailPackage, ACCEPTABLE_PACKAGES);
+    validateServices(
+      contactFormData.detailPackage,
+      ValueType.SERVICES,
+      ACCEPTABLE_PACKAGES
+    );
 
-    if (contactData.additionalServices != null) {
-      validateServices(contactData.additionalServices, ACCEPTABLE_ADD_SERVICES);
+    if (contactFormData.additionalServices != null) {
+      validateServices(
+        contactFormData.additionalServices,
+        ValueType.ADD_SERVICES,
+        ValueType.ACCEPTABLE_ADD_SERVICES
+      );
     }
 
-    contactData.id = crypto.randomUUID();
+    let requestData;
+    requestData.id = crypto.randomUUID();
+    requestData.name = contactFormData.name;
+    requestData.phone = contactFormData.phone;
+    requestData.email = contactFormData.email;
+    requestData.date = contactFormData.date;
+    requestData.time = contactFormData.time;
+    requestData.comments = contactFormData.comments;
+    requestData.carType = contactFormData.carType;
+    requestData.detailPackage = contactFormData.detailPackage;
+    requestData.additionalServices = contactFormData.addServices;
 
     await fetch(persistenceApiEndpoint, {
       method: "PUT",
       headers: headers,
-      body: JSON.stringify(contactData),
+      body: JSON.stringify(requestData),
     });
   } catch (error) {
     statusCode = 400;
@@ -86,8 +109,19 @@ function validateField(value, valueType, minLength, maxLength) {
   }
 }
 
-function validateServices(value, acceptableValues) {
-  if (!acceptableValues.includes(value.toLowerCase())) {
+function validateServices(value, valueType, acceptableValues) {
+  const lowercaseValues = acceptableValues.map((value) => value.toLowerCase());
+
+  if (valueType === ValueType.ADD_SERVICES) {
+    const arrayOfServices = value.split(",");
+
+    if (
+      () =>
+        !arrayOfServices.every((service) => acceptableValues.includes(service))
+    ) {
+      throw Error("Invalid Additional Services");
+    }
+  } else if (!lowercaseValues.includes(value.toLowerCase())) {
     throw Error("Invalid Services");
   }
 }
