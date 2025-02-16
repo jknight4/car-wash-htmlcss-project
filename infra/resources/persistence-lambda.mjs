@@ -18,6 +18,7 @@ export const handler = async (event) => {
     switch (event.routeKey) {
       case "PUT /contacts":
         let requestJSON = JSON.parse(event.body);
+        console.log(JSON.stringify(requestJSON));
         await docClient.send(
           new PutCommand({
             TableName: tableName,

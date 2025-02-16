@@ -43,7 +43,7 @@ class PersistenceStack extends Stack {
       saveLambda
     );
 
-    const httpApi = new HttpApi(this, "HttpApi");
+    const httpApi = new HttpApi(this, "PersistenceHttpApi");
 
     httpApi.addRoutes({
       path: contactsPath,

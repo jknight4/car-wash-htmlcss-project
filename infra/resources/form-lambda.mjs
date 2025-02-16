@@ -33,10 +33,12 @@ export const handler = async (event) => {
   let statusCode = 200;
   const headers = {
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    "Access-Control-Allow-Origin": "https://primetimeauto.knightj.xyz",
+    "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "OPTIONS, PUT",
   };
+
   let contactFormData = JSON.parse(event.body);
+  console.log(JSON.stringify(contactFormData));
   const persistenceApiEndpoint = process.env.PERSISTENCE_API;
 
   try {
@@ -46,7 +48,7 @@ export const handler = async (event) => {
     validateField(contactFormData.date, ValueType.DATE, 0, 10);
     validateField(contactFormData.time, ValueType.TIME, 0, 6);
 
-    if (contactFormData.comments !== null || contactFormData.comments !== "") {
+    if (contactFormData.comments) {
       validateField(contactFormData.comments, ValueType.TEXT, 0, 250);
     }
 
@@ -62,10 +64,7 @@ export const handler = async (event) => {
       ACCEPTABLE_PACKAGES
     );
 
-    if (
-      contactFormData.additionalServices !== null ||
-      contactFormData.additionalServices !== ""
-    ) {
+    if (contactFormData.additionalServices) {
       validateServices(
         contactFormData.additionalServices,
         ValueType.ADD_SERVICES,
@@ -73,7 +72,7 @@ export const handler = async (event) => {
       );
     }
 
-    let requestData;
+    let requestData = {};
     requestData.id = crypto.randomUUID();
     requestData.name = contactFormData.name;
     requestData.phone = contactFormData.phone;
@@ -85,11 +84,18 @@ export const handler = async (event) => {
     requestData.detailPackage = contactFormData.detailPackage;
     requestData.additionalServices = contactFormData.addServices;
 
-    await fetch(persistenceApiEndpoint, {
+    console.log("2", JSON.stringify(requestData));
+    console.log(persistenceApiEndpoint);
+
+    const response = await fetch(persistenceApiEndpoint, {
       method: "PUT",
-      headers: headers,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestData),
     });
+
+    if (!response.ok) {
+      throw new Error(`Error calling Persistence Lambda, ${response.status}`);
+    }
   } catch (error) {
     statusCode = 400;
     body = JSON.stringify(error.message.toString());
@@ -104,16 +110,18 @@ export const handler = async (event) => {
 
 function validateField(value, valueType, minLength, maxLength) {
   if (
-    value == null ||
+    value === null ||
     value === "" ||
     value.length < minLength ||
     value.length > maxLength
   ) {
+    console.log("validation failed:", value, valueType);
     throw Error("Invalid Input");
   }
 
   if (valueType === ValueType.EMAIL) {
     if (!value.includes("@")) {
+      console.log("validation failed on email");
       throw Error("Invalid Email");
     }
   }
@@ -129,9 +137,11 @@ function validateServices(value, valueType, acceptableValues) {
       () =>
         !arrayOfServices.every((service) => acceptableValues.includes(service))
     ) {
+      console.log("Failed additonal Services");
       throw Error("Invalid Additional Services");
     }
   } else if (!lowercaseValues.includes(value.toLowerCase())) {
+    console.log("Failed services");
     throw Error("Invalid Services");
   }
 }

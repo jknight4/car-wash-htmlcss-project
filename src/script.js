@@ -197,18 +197,15 @@ async function sendData(formData) {
   formData.delete("additionalServices");
 
   console.log(JSON.stringify(Object.fromEntries(formData)));
-  const api = "https://upjuxt4vb0.execute-api.us-east-1.amazonaws.com/form";
+  const api = "https://primetimeautoform.knightj.xyz/form";
 
   const headers = {
     "Content-Type": "application/json",
   };
-  const response = await fetch(api, {
+
+  await fetch(api, {
     method: "PUT",
     headers: headers,
-    body: JSON.stringify(formData),
+    body: JSON.stringify(Object.fromEntries(formData)),
   });
-
-  if (!response.ok) {
-    console.log(response.blob);
-  }
 }
