@@ -149,12 +149,18 @@ multiStepForm.addEventListener("click", (e) => {
   console.log("Did Form Screen pass Validation:", allValid);
 
   if (allValid) {
-    console.log("hi", currentStep);
+    let isFormSuccess = true;
     if (currentStep === 2) {
-      sendData(new FormData(form));
+      const response = sendData(new FormData(form));
+
+      !response.ok ? (isFormSuccess = false) : (isFormSuccess = true);
     }
 
-    currentStep += incrementor;
+    if (isFormSuccess) {
+      currentStep += incrementor;
+    } else {
+      currentStep = 4;
+    }
     showCurrentStep();
     showCurrentStatusStep();
   }

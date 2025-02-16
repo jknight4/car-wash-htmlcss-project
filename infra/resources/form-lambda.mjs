@@ -9,10 +9,10 @@ const ValueType = {
   ADD_SERVICES: "addServices",
 };
 
-const ACCEPTABLE_CAR_TYPES = ["sedan", "suv", "pickup truck", "other"];
+const ACCEPTABLE_CAR_TYPES = ["sedan", "suv", "pickup-truck", "other"];
 
 const ACCEPTABLE_PACKAGES = [
-  "exterior only",
+  "exterior-only",
   "express",
   "gold",
   "platinum",
@@ -46,7 +46,7 @@ export const handler = async (event) => {
     validateField(contactFormData.date, ValueType.DATE, 0, 10);
     validateField(contactFormData.time, ValueType.TIME, 0, 6);
 
-    if (contactFormData.comments != null) {
+    if (contactFormData.comments !== null || contactFormData.comments !== "") {
       validateField(contactFormData.comments, ValueType.TEXT, 0, 250);
     }
 
@@ -62,11 +62,14 @@ export const handler = async (event) => {
       ACCEPTABLE_PACKAGES
     );
 
-    if (contactFormData.additionalServices != null) {
+    if (
+      contactFormData.additionalServices !== null ||
+      contactFormData.additionalServices !== ""
+    ) {
       validateServices(
         contactFormData.additionalServices,
         ValueType.ADD_SERVICES,
-        ValueType.ACCEPTABLE_ADD_SERVICES
+        ACCEPTABLE_ADD_SERVICES
       );
     }
 
@@ -100,7 +103,12 @@ export const handler = async (event) => {
 };
 
 function validateField(value, valueType, minLength, maxLength) {
-  if (value == null || value.length < minLength || value.length > maxLength) {
+  if (
+    value == null ||
+    value === "" ||
+    value.length < minLength ||
+    value.length > maxLength
+  ) {
     throw Error("Invalid Input");
   }
 
