@@ -10,7 +10,14 @@ const {
   DomainName,
 } = require("aws-cdk-lib/aws-apigatewayv2");
 const { Certificate } = require("aws-cdk-lib/aws-certificatemanager");
-const { HostedZone, CnameRecord } = require("aws-cdk-lib/aws-route53");
+const {
+  HostedZone,
+  RecordTarget,
+  ARecord,
+} = require("aws-cdk-lib/aws-route53");
+const {
+  ApiGatewayv2DomainProperties,
+} = require("aws-cdk-lib/aws-route53-targets");
 
 const path = require("path");
 
@@ -22,6 +29,7 @@ class FormServiceStack extends Stack {
     const handler = "form-lambda.handler";
     const formPath = "/form";
     const domainName = "primetimeautoform.knightj.xyz";
+    const origin = "https://primetimeauto.knightj.xyz";
     const zoneName = "knightj.xyz";
     const zoneId = "Z021012427XAF7I60WUZT";
 
@@ -35,17 +43,17 @@ class FormServiceStack extends Stack {
       },
     });
 
-    // API GW
-    const formIntegration = new HttpLambdaIntegration(
-      "FormIntegration",
-      formServiceLambda
-    );
-
     //Cert for custom Domain
     const customCert = Certificate.fromCertificateArn(
       this,
       "customCert",
       `arn:aws:acm:${this.region}:${this.account}:certificate/6fec3492-fffd-4e8d-880f-52eedd0786b1`
+    );
+
+    // API GW
+    const formIntegration = new HttpLambdaIntegration(
+      "FormIntegration",
+      formServiceLambda
     );
 
     const fullDomainName = new DomainName(this, "DomainNameFormService", {
@@ -57,12 +65,12 @@ class FormServiceStack extends Stack {
       corsPreflight: {
         allowMethods: [CorsHttpMethod.PUT, CorsHttpMethod.OPTIONS],
         allowHeaders: ["Content-Type", "Authorization"],
-        allowOrigins: ["https://primetimeauto.knightj.xyz", "*"],
+        allowOrigins: [origin],
       },
       defaultDomainMapping: {
         domainName: fullDomainName,
-        mappingKey: "form",
       },
+      disableExecuteApiEndpoint: true,
     });
 
     httpApi.addRoutes({
@@ -81,10 +89,15 @@ class FormServiceStack extends Stack {
       }
     );
 
-    new CnameRecord(this, "CnameAPIGWApiRecord", {
+    new ARecord(this, "ARecordAPIGW", {
       recordName: domainName,
-      domainName: fullDomainName.regionalDomainName,
       zone: hostedZone,
+      target: RecordTarget.fromAlias(
+        new ApiGatewayv2DomainProperties(
+          fullDomainName.regionalDomainName,
+          fullDomainName.regionalHostedZoneId
+        )
+      ),
     });
   }
 }

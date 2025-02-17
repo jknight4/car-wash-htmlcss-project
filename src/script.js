@@ -3,7 +3,7 @@ const yearEl = document.querySelector(".copyright-date");
 const currentYear = new Date().getFullYear();
 yearEl.textContent = currentYear;
 
-// Form date validations
+// Form date/ time validations
 const currentDate = new Date();
 const currentDateFormattedToArray = new Intl.DateTimeFormat("en-US")
   .format(currentDate)
@@ -58,6 +58,41 @@ function addAZero(dateValue) {
   }
   return dayOrMonth;
 }
+
+const formTime = document.querySelector('input[name="time"]');
+if (document.querySelector('input[name="date"]').value === currentDate) {
+}
+
+const compareCurrentDate = [
+  currentDateFormattedToArray[2],
+  addAZero(currentDateFormattedToArray[0]),
+  addAZero(currentDateFormattedToArray[1]),
+].join("-");
+
+function getNextFullHour() {
+  const now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+
+  if (minutes > 0) {
+    hours += 1;
+  }
+
+  const roundedHours = hours < 10 ? `0${hours}` : hours;
+
+  return `${roundedHours}:00`;
+}
+
+formDate.addEventListener("change", function () {
+  const selectedDate = formDate.value;
+  console.log("Selected Date:", selectedDate);
+
+  if (selectedDate === compareCurrentDate) {
+    formTime.setAttribute("min", getNextFullHour());
+  } else {
+    formTime.removeAttribute("min");
+  }
+});
 
 // Make mobile navigation work
 const btnNavEl = document.querySelector(".btn-mobile-nav");
@@ -127,7 +162,7 @@ if (currentStep < 0) {
   showCurrentStatusStep();
 }
 
-multiStepForm.addEventListener("click", (e) => {
+multiStepForm.addEventListener("click", async (e) => {
   let incrementor;
   if (e.target.matches("[data-next]")) {
     incrementor = 1;
@@ -151,9 +186,9 @@ multiStepForm.addEventListener("click", (e) => {
   if (allValid) {
     let isFormSuccess = true;
     if (currentStep === 2) {
-      const response = sendData(new FormData(form));
+      const response = await sendData(new FormData(form));
 
-      !response.ok ? (isFormSuccess = false) : (isFormSuccess = true);
+      response.ok ? (isFormSuccess = true) : (isFormSuccess = false);
     }
 
     if (isFormSuccess) {
@@ -203,7 +238,7 @@ async function sendData(formData) {
     "Content-Type": "application/json",
   };
 
-  await fetch(api, {
+  return await fetch(api, {
     method: "PUT",
     headers: headers,
     body: JSON.stringify(Object.fromEntries(formData)),
