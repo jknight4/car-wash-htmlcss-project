@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="img/primetime-favicon.png" />
 
-    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -606,13 +606,13 @@
               <!-- FORM SLIDE 1 -->
               <div data-step class="card active">
                 <div class="form-group cta-name">
-                  <label for="full-name">Full name</label>
+                  <label for="name">Full name</label>
                   <input
-                    id="full-name"
+                    id="name"
                     type="text"
                     placeholder="Jane Doe"
-                    name="full-name"
-                    required=""
+                    name="name"
+                    required
                   />
                 </div>
 
@@ -623,7 +623,7 @@
                     type="email"
                     placeholder="me@example.com"
                     name="email"
-                    required=""
+                    required
                   />
                 </div>
 
@@ -633,8 +633,8 @@
                     id="phone"
                     type="tel"
                     placeholder="555-555-5555"
-                    name="phone-number"
-                    required=""
+                    name="phone"
+                    required
                   />
                 </div>
                 <div class="cta-btn">
@@ -647,12 +647,12 @@
               <!-- FORM SLIDE 2 -->
               <div data-step class="card hide">
                 <div class="form-group cta-cartype">
-                  <label for="car-type">What is your car type</label>
+                  <label for="carType">What is your car type</label>
                   <select
-                    id="car-type"
+                    id="carType"
                     class="cta-select-box"
-                    name="car-type"
-                    required=""
+                    name="carType"
+                    required
                   >
                     <option value="">--Please choose one option--</option>
                     <option value="sedan">Sedan</option>
@@ -664,7 +664,7 @@
 
                 <div class="form-group">
                   <label for="package">Select your desired package</label>
-                  <select id="package" name="detail-package" required="">
+                  <select id="package" name="detailPackage" required>
                     <option value="">--Please choose one option--</option>
                     <option value="exterior-only">Exterior only</option>
                     <option value="express">Express</option>
@@ -682,12 +682,13 @@
                         <input
                           type="checkbox"
                           class="checkbox"
-                          id="add-services-1"
-                          name="add-services-1"
+                          id="headlightRestoration"
+                          name="additionalServices"
+                          value="headlightRestoration"
                         />
                       </div>
                       <div>
-                        <label class="checkbox-text" for="add-services-1"
+                        <label class="checkbox-text" for="headlightRestoration"
                           >Headlight Restoration</label
                         >
                       </div>
@@ -697,12 +698,13 @@
                         <input
                           type="checkbox"
                           class="checkbox"
-                          id="add-services-2"
-                          name="add-services-2"
+                          id="engineDetail"
+                          name="additionalServices"
+                          value="engineDetail"
                         />
                       </div>
                       <div>
-                        <label class="checkbox-text" for="add-services-2"
+                        <label class="checkbox-text" for="engineDetail"
                           >Engine Detail</label
                         >
                       </div>
@@ -712,12 +714,13 @@
                         <input
                           type="checkbox"
                           class="checkbox"
-                          id="add-services-3"
-                          name="add-services-3"
+                          id="scratchRemoval"
+                          name="additionalServices"
+                          value="scratchRemoval"
                         />
                       </div>
                       <div>
-                        <label class="checkbox-text" for="add-services-3"
+                        <label class="checkbox-text" for="additionalServices"
                           >Scratch Removal</label
                         >
                       </div>
@@ -727,12 +730,13 @@
                         <input
                           type="checkbox"
                           class="checkbox"
-                          id="add-services-4"
-                          name="add-services-4"
+                          id="clayBarTreatment"
+                          name="additionalServices"
+                          value="clayBarTreatment"
                         />
                       </div>
                       <div>
-                        <label class="checkbox-text" for="add-services-4"
+                        <label class="checkbox-text" for="clayBarTreatment"
                           >Clay Bar Treatment</label
                         >
                       </div>
@@ -742,12 +746,13 @@
                         <input
                           type="checkbox"
                           class="checkbox"
-                          id="add-services-5"
-                          name="add-services-5"
+                          id="odorRemovalTreatment"
+                          name="additionalServices"
+                          value="odorRemovalTreatment"
                         />
                       </div>
                       <div>
-                        <label class="checkbox-text" for="add-services-5"
+                        <label class="checkbox-text" for="odorRemovalTreatment"
                           >Odor Removal Treatment</label
                         >
                       </div>
@@ -757,12 +762,13 @@
                         <input
                           type="checkbox"
                           class="checkbox"
-                          id="add-services-6"
-                          name="add-services-6"
+                          id="ceramicCoating"
+                          name="additionalServices"
+                          value="ceramicCoating"
                         />
                       </div>
                       <div>
-                        <label class="checkbox-text" for="add-services-6"
+                        <label class="checkbox-text" for="ceramicCoating"
                           >Ceramic Coating</label
                         >
                       </div>
@@ -789,6 +795,7 @@
                     id="date"
                     min="2022-03-05"
                     max="3000-01-01"
+                    required
                   />
                 </div>
 
@@ -799,6 +806,7 @@
                     type="time"
                     id="appt-time"
                     name="appt-time"
+                    step="1800"
                     required
                   />
                   <small
@@ -822,10 +830,27 @@
                   <button type="button" class="btn btn--form" data-back>
                     Back
                   </button>
-                  <button type="submit" class="btn btn--form" data>
+                  <button
+                    type="submit"
+                    id="form-submit"
+                    class="btn btn--form"
+                    data-next
+                  >
                     Book Now
                   </button>
                 </div>
+              </div>
+
+              <!-- FORM SLIDE 4 -->
+              <div data-step class="card hide">
+                <p class="cta-thank-you">Thank you for submitting the form!</p>
+              </div>
+
+              <!-- FORM SLIDE 5 -->
+              <div data-step class="card hide">
+                <p class="cta-thank-you">
+                  Something went wrong, please resubmit form
+                </p>
               </div>
             </form>
           </div>

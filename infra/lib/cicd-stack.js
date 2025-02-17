@@ -29,6 +29,8 @@ class CICDStack extends Stack {
           "npm ci",
           "npm run test",
           "npx cdk synth Prod/InfraStack",
+          "npx cdk synth Prod/PersistenceStack",
+          "npx cdk synth Prod/FormServiceStack",
         ],
         primaryOutputDirectory: outputDirectory,
       }),

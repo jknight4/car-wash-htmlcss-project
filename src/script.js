@@ -3,7 +3,7 @@ const yearEl = document.querySelector(".copyright-date");
 const currentYear = new Date().getFullYear();
 yearEl.textContent = currentYear;
 
-// Form date validations
+// Form date/ time validations
 const currentDate = new Date();
 const currentDateFormattedToArray = new Intl.DateTimeFormat("en-US")
   .format(currentDate)
@@ -59,6 +59,41 @@ function addAZero(dateValue) {
   return dayOrMonth;
 }
 
+const formTime = document.querySelector('input[name="time"]');
+if (document.querySelector('input[name="date"]').value === currentDate) {
+}
+
+const compareCurrentDate = [
+  currentDateFormattedToArray[2],
+  addAZero(currentDateFormattedToArray[0]),
+  addAZero(currentDateFormattedToArray[1]),
+].join("-");
+
+function getNextFullHour() {
+  const now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+
+  if (minutes > 0) {
+    hours += 1;
+  }
+
+  const roundedHours = hours < 10 ? `0${hours}` : hours;
+
+  return `${roundedHours}:00`;
+}
+
+formDate.addEventListener("change", function () {
+  const selectedDate = formDate.value;
+  console.log("Selected Date:", selectedDate);
+
+  if (selectedDate === compareCurrentDate) {
+    formTime.setAttribute("min", getNextFullHour());
+  } else {
+    formTime.removeAttribute("min");
+  }
+});
+
 // Make mobile navigation work
 const btnNavEl = document.querySelector(".btn-mobile-nav");
 const headerEl = document.querySelector(".header");
@@ -102,7 +137,6 @@ const obs = new IntersectionObserver(function (entries) {
 obs.observe(scrollWatcher);
 
 // FAQs Section, collapsible elements
-
 const accordion = document.getElementsByClassName("item");
 
 for (i = 0; i < accordion.length; i++) {
@@ -112,7 +146,8 @@ for (i = 0; i < accordion.length; i++) {
 }
 
 // Form
-
+const form = document.querySelector(".cta-form");
+const btnSubmit = document.getElementById("form-submit");
 const multiStepForm = document.querySelector("[data-multi-step");
 const formScreens = [...multiStepForm.querySelectorAll("[data-step]")];
 const statusSteps = [...document.getElementsByClassName("cta-status-step")];
@@ -127,7 +162,7 @@ if (currentStep < 0) {
   showCurrentStatusStep();
 }
 
-multiStepForm.addEventListener("click", (e) => {
+multiStepForm.addEventListener("click", async (e) => {
   let incrementor;
   if (e.target.matches("[data-next]")) {
     incrementor = 1;
@@ -137,18 +172,35 @@ multiStepForm.addEventListener("click", (e) => {
 
   if (incrementor == null) return;
 
-  const inputs = [...formScreens[currentStep].querySelectorAll("input")];
+  const inputs = [
+    ...formScreens[currentStep].querySelectorAll("input"),
+    ...formScreens[currentStep].querySelectorAll("select"),
+  ];
+
+  console.log(inputs);
+
   const allValid = inputs.every((input) => input.reportValidity());
 
-  console.log(allValid);
+  console.log("Did Form Screen pass Validation:", allValid);
 
   if (allValid) {
-    currentStep += incrementor;
+    let isFormSuccess = true;
+    if (currentStep === 2) {
+      const response = await sendData(new FormData(form));
+
+      response.ok ? (isFormSuccess = true) : (isFormSuccess = false);
+    }
+
+    if (isFormSuccess) {
+      currentStep += incrementor;
+    } else {
+      currentStep = 4;
+    }
     showCurrentStep();
     showCurrentStatusStep();
   }
 
-  console.log(currentStep);
+  console.log("Current form screen step:", currentStep);
 });
 
 formScreens.forEach((step) => {
@@ -167,5 +219,28 @@ function showCurrentStep() {
 function showCurrentStatusStep() {
   statusSteps.forEach((status, index) => {
     status.classList.toggle("active-step", index <= currentStep);
+  });
+}
+
+btnSubmit.addEventListener("click", async (e) => {
+  e.preventDefault();
+});
+
+async function sendData(formData) {
+  const additionalServices = formData.getAll("additionalServices");
+  formData.append("addServices", additionalServices);
+  formData.delete("additionalServices");
+
+  console.log(JSON.stringify(Object.fromEntries(formData)));
+  const api = "https://primetimeautoform.knightj.xyz/form";
+
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  return await fetch(api, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(Object.fromEntries(formData)),
   });
 }
