@@ -47,7 +47,8 @@
 
     Integrated infrastucture tests within the pipeline.
 
-    Created two AWS Lambda functions for server-side validation and securing database calls, exposing them through API Gateway to enable the Contact Us form to submit data to DynamoDB.
+    Created two AWS Lambda functions for server-side validation and securing database calls, 
+    exposing them through API Gateway to enable the Contact Us form to submit data to DynamoDB.
 
 ## Wireframes
 
