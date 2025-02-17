@@ -8,7 +8,8 @@
 
 ## Technologies
 
-    HTML, CSS, JavaScript, AWS (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, CodePipelines)
+    HTML, CSS, JavaScript, AWS 
+    (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, CodePipelines)
 
 ## Status
 
