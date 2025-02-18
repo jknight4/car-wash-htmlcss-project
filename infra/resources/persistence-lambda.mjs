@@ -7,7 +7,7 @@ const docClient = DynamoDBDocumentClient.from(client);
 const tableName = process.env.TABLE_NAME;
 
 export const handler = async (event) => {
-  let body;
+  let body = "";
   let statusCode = 200;
 
   const headers = {
@@ -49,5 +49,6 @@ export const handler = async (event) => {
   return {
     statusCode,
     headers,
+    body,
   };
 };

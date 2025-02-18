@@ -1,3 +1,5 @@
+import { SSMClient, GetParameterCommand } from "@aws-sdk/client-ssm";
+
 const ValueType = {
   NAME: "name",
   EMAIL: "email",
@@ -29,7 +31,15 @@ const ACCEPTABLE_ADD_SERVICES = [
 ];
 
 export const handler = async (event) => {
-  let body;
+  const ssmClient = new SSMClient();
+
+  const input = {
+    Name: "/apis/google-recaptcha",
+    WithDecryption: true,
+  };
+  const command = new GetParameterCommand(input);
+  const ssmClientResponse = await ssmClient.send(command);
+  let body = "";
   let statusCode = 200;
   const headers = {
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
@@ -73,7 +83,15 @@ export const handler = async (event) => {
       );
     }
 
-    validateCaptcha(recaptchaApi, contactFormData["g-recaptcha-response"]);
+    const captchaRes = await validateCaptcha(
+      recaptchaApi,
+      contactFormData["g-recaptcha-response"],
+      ssmClientResponse.Parameter.Value
+    );
+
+    if (!captchaRes.success) {
+      throw Error("Captcha Validation Failed");
+    }
 
     let requestData = {};
     requestData.id = crypto.randomUUID();
@@ -98,7 +116,7 @@ export const handler = async (event) => {
     }
   } catch (error) {
     statusCode = 400;
-    body = JSON.stringify(error.message.toString());
+    body = JSON.stringify({ error: error.message });
   }
 
   return {
@@ -146,23 +164,19 @@ function validateServices(value, valueType, acceptableValues) {
   }
 }
 
-async function validateCaptcha(api, value) {
+async function validateCaptcha(api, value, apiKey) {
   const params = new URLSearchParams({
-    secret: process.env.API_KEY,
+    secret: apiKey,
     response: value,
   });
 
   if (value) {
-    const response = await fetch(api + "?" + params.toString(), {
+    const res = await fetch(api + "?" + params.toString(), {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { "Content-Type": "application/json" },
     });
 
-    const data = await response.json();
-
-    if (!data.success) {
-      throw Error("Captcha Validation Failed");
-    }
+    return res.json();
   } else {
     console.log("Missing captcha response value");
     throw Error("Missing Captcha Response Value");

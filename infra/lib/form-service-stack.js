@@ -1,4 +1,4 @@
-const { Stack, Fn } = require("aws-cdk-lib");
+const { Stack, Fn, Duration } = require("aws-cdk-lib");
 const { Function, Runtime, Code } = require("aws-cdk-lib/aws-lambda");
 const {
   HttpLambdaIntegration,
@@ -34,13 +34,14 @@ class FormServiceStack extends Stack {
     const zoneName = "knightj.xyz";
     const zoneId = "Z021012427XAF7I60WUZT";
     const parameterName = "/apis/google-recaptcha";
+    const durationSeconds = 10;
 
     // Import SSM Value
     const parameter = StringParameter.fromSecureStringParameterAttributes(
       this,
       "ImportedAPISecret",
       { parameterName: parameterName }
-    ).stringValue;
+    );
 
     // Lambda Function
     const formServiceLambda = new Function(this, "ServiceFunction", {
@@ -49,9 +50,11 @@ class FormServiceStack extends Stack {
       code: Code.fromAsset(path.resolve(__dirname, "../resources")),
       environment: {
         PERSISTENCE_API: API_INTEGRATION,
-        API_KEY: parameter,
       },
+      timeout: Duration.seconds(durationSeconds),
     });
+
+    parameter.grantRead(formServiceLambda);
 
     //Cert for custom Domain
     const customCert = Certificate.fromCertificateArn(
