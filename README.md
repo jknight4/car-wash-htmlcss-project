@@ -14,7 +14,7 @@
 
 ## Status
 
-    Project is in progress (February 2022 - Present)
+    Project is in progress (February 2022 - February 2025)
 
 ## Why
 
@@ -41,7 +41,7 @@
 ## Infrastructure
 
     I used AWS CDK to provision various resources
-    (S3 Bucket, CloudFront Distribution, CodePipelines, Inserting a DNS record, Lambdas, DynamoDB API Gateway).
+    (S3 Bucket, CloudFront Distribution, CodePipelines, Inserting a DNS record, Lambdas, DynamoDB, API Gateway).
 
     Setup automated CI/CD pipeline with CodePipelines that is triggered by GitHub Commits to the main branch.
 
