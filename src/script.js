@@ -262,10 +262,6 @@ async function sendData(formData) {
   formData.append("addServices", additionalServices);
   formData.delete("additionalServices");
 
-  const json = JSON.stringify(Object.fromEntries(formData));
-  const parseJ = JSON.parse(json);
-  console.log(json);
-  console.log(parseJ["g-recaptcha-response"]);
   const api = "https://primetimeautoform.knightj.xyz/form";
 
   const headers = {
