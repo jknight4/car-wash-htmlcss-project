@@ -709,8 +709,8 @@ body {
 
 }
 
-.hide {
-    display: none;
+.hide{
+    display: none !important;
 }
 
 .active {
@@ -832,9 +832,29 @@ small {
     cursor: pointer;
 }
 
+#form-submit {
+    transition: all 0.3s;
+}
+
 .btn--form:hover {
     color: #a4161a;
     background-color: #fff;
+}
+
+.btn-active-submit {
+    color: #a4161a;
+    background-color: #fff;
+}
+
+.loading-spinner {
+    border: .3rem solid #F5F5F5;
+    border-top: .3rem solid #a4161a;
+    border-radius: 50%;
+    width: 1.8rem;
+    height: 1.8rem;
+    display: inline-block;
+    margin-left: 1rem;
+    animation: spin 1.2s linear infinite;
 }
 
 @keyframes slide {
@@ -865,6 +885,16 @@ small {
         opacity: 0;
     }
 }
+
+@keyframes spin {
+    0% { 
+        transform: rotate(0deg); 
+    }
+
+    100% { 
+        transform: rotate(360deg); 
+    }
+  }
 
 /* ---------------------- */
 /* FOOTER SECTION */

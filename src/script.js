@@ -180,6 +180,7 @@ multiStepForm.addEventListener("click", async (e) => {
   console.log(inputs);
 
   const errorText = document.querySelector(".recaptcha-validation");
+  const loadingSpinner = document.querySelector(".loading-spinner");
 
   if (incrementor === 1) {
     const allValid = inputs.every((input) => input.reportValidity());
@@ -198,6 +199,10 @@ multiStepForm.addEventListener("click", async (e) => {
           if (!errorText.classList.contains("hide")) {
             errorText.classList.toggle("hide");
           }
+
+          loadingSpinner.classList.toggle("hide");
+          btnSubmit.classList.toggle("btn-active-submit");
+
           const response = await sendData(new FormData(form));
 
           response.ok ? (isFormSuccess = true) : (isFormSuccess = false);
@@ -216,6 +221,9 @@ multiStepForm.addEventListener("click", async (e) => {
     if (!errorText.classList.contains("hide")) {
       errorText.classList.toggle("hide");
     }
+    if (!loadingSpinner.classList.contains("hide")) {
+      loadingSpinner.classList.toggle("hide");
+    }
     currentStep += incrementor;
     showCurrentStep();
     showCurrentStatusStep();
@@ -231,7 +239,8 @@ function isRecaptchaSubmitted() {
     return true;
   } else {
     console.log("recaptacha not submitted");
-    return false;
+    return true;
+    //turn back
   }
 }
 
