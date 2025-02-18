@@ -1,4 +1,4 @@
-const { Stack, Fn, Token } = require("aws-cdk-lib");
+const { Stack, Fn } = require("aws-cdk-lib");
 const { Function, Runtime, Code } = require("aws-cdk-lib/aws-lambda");
 const {
   HttpLambdaIntegration,
