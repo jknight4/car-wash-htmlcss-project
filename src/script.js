@@ -239,8 +239,7 @@ function isRecaptchaSubmitted() {
     return true;
   } else {
     console.log("recaptacha not submitted");
-    return true;
-    //turn back
+    return false;
   }
 }
 
