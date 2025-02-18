@@ -1,5 +1,3 @@
-import { SecretValue } from "aws-cdk-lib";
-
 const ValueType = {
   NAME: "name",
   EMAIL: "email",
@@ -88,9 +86,6 @@ export const handler = async (event) => {
     requestData.carType = contactFormData.carType;
     requestData.detailPackage = contactFormData.detailPackage;
     requestData.additionalServices = contactFormData.addServices;
-
-    console.log("2", JSON.stringify(requestData));
-    console.log(persistenceApiEndpoint);
 
     const response = await fetch(persistenceApiEndpoint, {
       method: "PUT",

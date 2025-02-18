@@ -222,6 +222,7 @@ multiStepForm.addEventListener("click", async (e) => {
   }
 
   console.log("Current form screen step:", currentStep);
+  console.log("Current form screen step:", currentStep);
 });
 
 function isRecaptchaSubmitted() {
