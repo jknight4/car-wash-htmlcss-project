@@ -107,7 +107,9 @@ btnNavEl.addEventListener("click", function () {
 const allLinks = document.querySelectorAll("a:link");
 allLinks.forEach(function (link) {
   link.addEventListener("click", function (e) {
-    e.preventDefault();
+    if (link.startsWith("#")) {
+      e.preventDefault();
+    }
     const href = link.getAttribute("href");
 
     // Scroll back to top
