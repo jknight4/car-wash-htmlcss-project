@@ -804,6 +804,13 @@ small {
     margin-top: 0.8rem;
 }
 
+.recaptcha-validation{
+    font-size: smaller;
+    margin-bottom: 1.8rem;
+    font-weight: 500;
+    color: #EED202;
+}
+
 .cta-form textarea {
     width: 100%;
     padding: 1.2rem;

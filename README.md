@@ -1,6 +1,6 @@
 # Static web site deployed to AWS
 
-    HTML/CSS/JS website for a fictitious automotive detailing business, deployed on AWS (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, CodePipelines)
+    HTML/CSS/JS website for a fictitious automotive detailing business, deployed on AWS (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, SSM Parameter Store, CodePipelines)
 
 ## Link to website
 
@@ -8,7 +8,7 @@
 
 ## Technologies
 
-    HTML, CSS, JavaScript, AWS (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, CodePipelines)
+    HTML, CSS, JavaScript, AWS (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, CodePipelines), Google reCaptcha API
 
 ## Status
 
@@ -46,6 +46,8 @@
     Integrated infrastucture tests within the pipeline.
 
     Created two AWS Lambda functions for server-side validation and securing database calls, exposing them through API Gateway to enable the Contact Us form to submit data to DynamoDB.
+
+    Implemented Google reCaptcha to protect the contact us form from spam and bots.
 
 ## Wireframes
 
