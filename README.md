@@ -1,7 +1,7 @@
 # Static web site deployed to AWS
 
-    HTML/CSS/JS website for a fictitious automotive detailing business, deployed on AWS 
-    (S3, CloudFront, Route53, Lambdas, DynamoDB, API Gateway, CodePipelines)
+    HTML/CSS/JS website for a fictitious automotive detailing business, deployed on AWS
+    (S3, CloudFront, Route53, Lambdas, DynamoDB API Gateway, SSM Parameter Store, CodePipelines)
 
 ## Link to website
 
@@ -9,12 +9,12 @@
 
 ## Technologies
 
-    HTML, CSS, JavaScript, AWS 
-    (S3, CloudFront, Route53, Lambdas, DynamoDB, API Gateway, CodePipelines)
+    HTML, CSS, JavaScript, Google reCaptcha API, AWS
+    (S3, CloudFront, Route53, Lambdas, DynamoDB, API Gateway, SSM Parameter Store, CodePipelines)
 
 ## Status
 
-    Project is in progress (February 2022 - Present)
+    Project is in progress (February 2022 - February 2025)
 
 ## Why
 
@@ -41,14 +41,16 @@
 ## Infrastructure
 
     I used AWS CDK to provision various resources
-    (S3 Bucket, CloudFront Distribution, CodePipelines, Inserting a DNS record, Lambdas, DynamoDB API Gateway).
+    (S3 Bucket, CloudFront Distribution, CodePipelines, Inserting a DNS record, Lambdas, DynamoDB, API Gateway).
 
     Setup automated CI/CD pipeline with CodePipelines that is triggered by GitHub Commits to the main branch.
 
     Integrated infrastucture tests within the pipeline.
 
-    Created two AWS Lambda functions for server-side validation and securing database calls, 
-    exposing them through API Gateway to enable the Contact Us form to submit data to DynamoDB.
+    Created two AWS Lambda functions for server-side validation and securing database calls, exposing them
+    through API Gateway to enable the Contact Us form to submit data to DynamoDB.
+
+    Implemented Google reCaptcha to protect the contact us form from spam and bots.
 
 ## Wireframes
 

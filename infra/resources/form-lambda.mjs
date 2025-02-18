@@ -40,6 +40,7 @@ export const handler = async (event) => {
   let contactFormData = JSON.parse(event.body);
   console.log(JSON.stringify(contactFormData));
   const persistenceApiEndpoint = process.env.PERSISTENCE_API;
+  const recaptchaApi = "https://www.google.com/recaptcha/api/siteverify";
 
   try {
     validateField(contactFormData.name, ValueType.NAME, 2, 70);
@@ -72,6 +73,8 @@ export const handler = async (event) => {
       );
     }
 
+    validateCaptcha(recaptchaApi, contactFormData["g-recaptcha-response"]);
+
     let requestData = {};
     requestData.id = crypto.randomUUID();
     requestData.name = contactFormData.name;
@@ -83,9 +86,6 @@ export const handler = async (event) => {
     requestData.carType = contactFormData.carType;
     requestData.detailPackage = contactFormData.detailPackage;
     requestData.additionalServices = contactFormData.addServices;
-
-    console.log("2", JSON.stringify(requestData));
-    console.log(persistenceApiEndpoint);
 
     const response = await fetch(persistenceApiEndpoint, {
       method: "PUT",
@@ -115,13 +115,13 @@ function validateField(value, valueType, minLength, maxLength) {
     value.length < minLength ||
     value.length > maxLength
   ) {
-    console.log("validation failed:", value, valueType);
+    console.log("Validation failed:", value, valueType);
     throw Error("Invalid Input");
   }
 
   if (valueType === ValueType.EMAIL) {
     if (!value.includes("@")) {
-      console.log("validation failed on email");
+      console.log("Validation failed on email");
       throw Error("Invalid Email");
     }
   }
@@ -137,11 +137,34 @@ function validateServices(value, valueType, acceptableValues) {
       () =>
         !arrayOfServices.every((service) => acceptableValues.includes(service))
     ) {
-      console.log("Failed additonal Services");
+      console.log("Failed additional services");
       throw Error("Invalid Additional Services");
     }
   } else if (!lowercaseValues.includes(value.toLowerCase())) {
     console.log("Failed services");
     throw Error("Invalid Services");
+  }
+}
+
+async function validateCaptcha(api, value) {
+  const params = new URLSearchParams({
+    secret: process.env.API_KEY,
+    response: value,
+  });
+
+  if (value) {
+    const response = await fetch(api + "?" + params.toString(), {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw Error("Captcha Validation Failed");
+    }
+  } else {
+    console.log("Missing captcha response value");
+    throw Error("Missing Captcha Response Value");
   }
 }

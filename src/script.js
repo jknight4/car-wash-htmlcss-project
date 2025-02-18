@@ -179,29 +179,61 @@ multiStepForm.addEventListener("click", async (e) => {
 
   console.log(inputs);
 
-  const allValid = inputs.every((input) => input.reportValidity());
+  const errorText = document.querySelector(".recaptcha-validation");
 
-  console.log("Did Form Screen pass Validation:", allValid);
+  if (incrementor === 1) {
+    const allValid = inputs.every((input) => input.reportValidity());
 
-  if (allValid) {
-    let isFormSuccess = true;
-    if (currentStep === 2) {
-      const response = await sendData(new FormData(form));
+    console.log("Did Form Screen pass Validation:", allValid);
 
-      response.ok ? (isFormSuccess = true) : (isFormSuccess = false);
+    if (allValid) {
+      let isFormSuccess = true;
+
+      //If recaptcha is not submitted on last step don't proceed,
+      // otherwise proceed BAU
+      if (currentStep === 2 && !isRecaptchaSubmitted()) {
+        errorText.classList.toggle("hide");
+      } else {
+        if (currentStep === 2) {
+          if (!errorText.classList.contains("hide")) {
+            errorText.classList.toggle("hide");
+          }
+          const response = await sendData(new FormData(form));
+
+          response.ok ? (isFormSuccess = true) : (isFormSuccess = false);
+        }
+
+        if (isFormSuccess) {
+          currentStep += incrementor;
+        } else {
+          currentStep = 4;
+        }
+        showCurrentStep();
+        showCurrentStatusStep();
+      }
     }
-
-    if (isFormSuccess) {
-      currentStep += incrementor;
-    } else {
-      currentStep = 4;
+  } else {
+    if (!errorText.classList.contains("hide")) {
+      errorText.classList.toggle("hide");
     }
+    currentStep += incrementor;
     showCurrentStep();
     showCurrentStatusStep();
   }
 
   console.log("Current form screen step:", currentStep);
+  console.log("Current form screen step:", currentStep);
 });
+
+function isRecaptchaSubmitted() {
+  if (grecaptcha.getResponse()) {
+    console.log("recaptacha selected");
+    return true;
+  } else {
+    console.log("recaptacha not submitted");
+    return false;
+  }
+}
 
 formScreens.forEach((step) => {
   step.addEventListener("animationend", (e) => {
@@ -231,7 +263,6 @@ async function sendData(formData) {
   formData.append("addServices", additionalServices);
   formData.delete("additionalServices");
 
-  console.log(JSON.stringify(Object.fromEntries(formData)));
   const api = "https://primetimeautoform.knightj.xyz/form";
 
   const headers = {
