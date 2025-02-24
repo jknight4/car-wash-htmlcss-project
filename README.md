@@ -14,7 +14,7 @@
 
 ## Status
 
-    Project is in progress (February 2022 - February 2025)
+    Project is completed(February 2022 - February 2025)
 
 ## Why
 
